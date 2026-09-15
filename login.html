@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LOGIN — Stackly Creative Studio Portal</title>
+<meta content="Access Stackly's Graphic Designer Portfolio &amp; Client Proofing Portal." name="description"/>
+<!-- Google Fonts: Space Grotesk (Display) & Inter (Body) -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=Space+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- FontAwesome Icons -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<!-- Main CSS -->
+<link href="styles.css" rel="stylesheet"/>
+<!-- GSAP -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet"/>
+</head>
+<body class="auth-page">
+<!-- PRELOADER -->
+<div aria-hidden="true" class="preloader" id="preloader">
+<div class="preloader-glow"></div>
+<div class="preloader-content">
+<div class="preloader-logo-wrapper">
+<div class="preloader-ring"></div>
+<img alt="Stackly Logo" class="preloader-logo-img" src="assets/logo.webp"/>
+</div>
+<div class="preloader-title">STACKLY</div>
+<div class="preloader-sub">CREATIVE STUDIO</div>
+<div class="preloader-track">
+<div class="preloader-fill" id="preloader-fill"></div>
+</div>
+<div class="preloader-counter" id="preloader-counter">0%</div>
+</div>
+<script>
+      (function() {
+        document.body.style.overflow = 'hidden';
+        var fill = document.getElementById('preloader-fill');
+        var counter = document.getElementById('preloader-counter');
+        var preloader = document.getElementById('preloader');
+        var start = Date.now();
+        var duration = 2000;
+        var done = false;
+
+        function finish() {
+          if (done) return;
+          done = true;
+          if (fill) fill.style.width = '100%';
+          if (counter) counter.textContent = '100%';
+          setTimeout(function() {
+            if (preloader) preloader.classList.add('preloader-hidden');
+            document.body.style.overflow = '';
+            setTimeout(function() {
+              if (preloader && preloader.parentNode) preloader.style.display = 'none';
+            }, 600);
+          }, 150);
+        }
+
+        function tick() {
+          if (done) return;
+          var elapsed = Date.now() - start;
+          var pct = Math.min(100, Math.floor((elapsed / duration) * 100));
+          if (fill) fill.style.width = pct + '%';
+          if (counter) counter.textContent = pct + '%';
+          if (pct < 100) {
+            requestAnimationFrame(tick);
+          } else {
+            finish();
+          }
+        }
+        requestAnimationFrame(tick);
+        setTimeout(finish, 2200);
+      })();
+    </script>
+</div>
+<!-- Background Glowing Orbs & Grid -->
+<div class="auth-bg-decor">
+<div class="auth-glow-orb auth-glow-1"></div>
+<div class="auth-glow-orb auth-glow-2"></div>
+<div class="auth-grid-overlay"></div>
+</div>
+<!-- Main Auth Container -->
+<div class="auth-container">
+<!-- LEFT SIDE: CREATIVE DESIGNER VISUAL SHOWCASE -->
+<div class="auth-visual-side">
+<div class="auth-visual-header">
+<div class="auth-brand-badge">
+<i class="fa-solid fa-wand-magic-sparkles"></i> STACKLY // PORTFOLIO
+        </div>
+<h1 class="auth-visual-title" data-aos="fade-up">CREATIVE STUDIO &amp; CLIENT PORTAL</h1>
+<p class="auth-visual-subtitle">
+          Manage brand identity assets, review 3D dielines, track motion graphics, and collaborate directly with Stackly.
+        </p>
+</div>
+<!-- Graphic Tools & Design Matrix Cards -->
+<div class="auth-graphic-matrix">
+<div class="graphic-tool-card">
+<i class="fa-solid fa-bezier-curve tool-icon"></i>
+<div class="tool-name">BRAND IDENTITY</div>
+<div class="tool-desc">Vector Systems &amp; Guidelines</div>
+</div>
+<div class="graphic-tool-card">
+<i class="fa-solid fa-cube tool-icon"></i>
+<div class="tool-name">3D &amp; PACKAGING</div>
+<div class="tool-desc">Dieline Renderings</div>
+</div>
+<div class="graphic-tool-card">
+<i class="fa-solid fa-film tool-icon"></i>
+<div class="tool-name">MOTION GRAPHICS</div>
+<div class="tool-desc">Kinetic Editorial Type</div>
+</div>
+<div class="graphic-tool-card">
+<i class="fa-solid fa-layer-group tool-icon"></i>
+<div class="tool-name">DIGITAL UI</div>
+<div class="tool-desc">Component Systems</div>
+</div>
+</div>
+<div class="auth-visual-footer">
+<span>© 2026 Stackly Studio</span>
+<span>Secure Client Encryption</span>
+</div>
+</div>
+<!-- RIGHT SIDE: AUTHENTICATION FORM -->
+<div class="auth-form-side">
+<a class="auth-back-btn" href="index.html">
+<i class="fa-solid fa-arrow-left"></i> BACK TO HOME
+      </a>
+<a class="auth-logo-link" href="index.html" title="STACKLY Home">
+<img alt="STACKLY Logo" class="brand-logo-img" src="assets/logo.webp"/>
+</a>
+<div class="auth-form-header">
+<h2 class="auth-form-title" data-aos="fade-up">PORTAL LOGIN</h2>
+<p class="auth-form-subtitle">Enter your credentials to access your dashboard</p>
+</div>
+<!-- Role Selector: Admin / User -->
+<div class="role-selector-container">
+<span class="role-selector-label">SELECT ACCESS ROLE</span>
+<div class="role-selector">
+<button class="role-btn active" data-role="user" type="button">
+<i class="fa-solid fa-user"></i> USER / CLIENT
+          </button>
+<button class="role-btn" data-role="admin" type="button">
+<i class="fa-solid fa-user-gear"></i> ADMIN
+          </button>
+</div>
+</div>
+<!-- Login Form with Custom Inline Validation -->
+<form id="login-page-form" novalidate="">
+<!-- Email Input -->
+<div class="auth-input-group">
+<label for="login-email">EMAIL ADDRESS</label>
+<div class="auth-input-wrapper">
+<i class="fa-solid fa-envelope input-icon"></i>
+<input id="login-email" placeholder="e.g. client@brand.com" type="email"/>
+</div>
+<div class="form-error-msg" id="login-email-error"></div>
+</div>
+<!-- Password Input with Eye Toggle -->
+<div class="auth-input-group">
+<label for="login-password">SECURE PASSWORD</label>
+<div class="auth-input-wrapper">
+<i class="fa-solid fa-lock input-icon"></i>
+<input class="has-toggle" id="login-password" placeholder="••••••••••••" type="password"/>
+<button aria-label="Toggle Password Visibility" class="password-toggle-btn" type="button">
+<i class="fa-solid fa-eye"></i>
+</button>
+</div>
+<div class="form-error-msg" id="login-password-error"></div>
+</div>
+<!-- Remember Me & Forgot Password -->
+<div class="auth-options-row">
+<label class="remember-checkbox">
+<input id="remember-me" type="checkbox"/>
+<span>Remember Me</span>
+</label>
+<a class="forgot-link" href="404.html">Forgot Password?</a>
+</div>
+<!-- Submit Button -->
+<button class="auth-submit-btn" type="submit">
+          LOGIN TO DASHBOARD <i class="fa-solid fa-arrow-right"></i>
+</button>
+</form>
+<p class="auth-switch-text">
+        Don't have an account? <a href="signup.html">Create Account</a>
+</p>
+</div>
+</div>
+<!-- Main JavaScript & Auth Engine -->
+<script src="main.js"></script>
+<script src="auth.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+</body>
+</html>

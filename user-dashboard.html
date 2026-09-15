@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CLIENT PORTAL DASHBOARD — Stackly Creative Studio</title>
+<meta content="Client &amp; User Project Portal for Stackly Graphic Designer Portfolio." name="description"/>
+<!-- Google Fonts: Space Grotesk (Display) & Inter (Body) -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=Space+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- FontAwesome Icons -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<!-- Main CSS -->
+<link href="styles.css" rel="stylesheet"/>
+<!-- Chart.js CDN -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!-- GSAP -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="dashboard-wrapper">
+<!-- USER SIDEBAR (STRICTLY 5 MENU OPTIONS) -->
+<aside class="dashboard-sidebar" id="dashboard-sidebar">
+<div class="sidebar-header">
+<a class="sidebar-logo" href="">
+<img alt="STACKLY Logo" class="brand-logo-img" src="assets/logo.webp"/>
+</a>
+<button class="mobile-sidebar-close" id="mobile-sidebar-close" title="Close Sidebar">
+<i class="fa-solid fa-xmark"></i>
+</button>
+</div>
+<div class="sidebar-menu">
+<div class="sidebar-label">CLIENT MENU</div>
+<!-- Option 1: Overview -->
+<a class="sidebar-link active" data-tab="tab-user-overview" data-title="Dashboard Overview" href="#">
+<i class="fa-solid fa-house-user"></i> <span>Overview</span>
+</a>
+<!-- Option 2: My Projects -->
+<a class="sidebar-link" data-tab="tab-user-projects" data-title="My Design Projects" href="#">
+<i class="fa-solid fa-folder-open"></i> <span>My Projects</span>
+</a>
+<!-- Option 3: Messages -->
+<a class="sidebar-link" data-tab="tab-user-messages" data-title="Design Messages" href="#">
+<i class="fa-solid fa-comments"></i> <span>Messages</span>
+</a>
+<!-- Option 4: Services -->
+<a class="sidebar-link" data-tab="tab-user-services" data-title="Request Services" href="#">
+<i class="fa-solid fa-wand-magic-sparkles"></i> <span>Services</span>
+</a>
+<!-- Option 5: Profile -->
+<a class="sidebar-link" data-tab="tab-user-profile" data-title="Account Profile" href="#">
+<i class="fa-solid fa-id-card"></i> <span>Profile</span>
+</a>
+</div>
+<div class="sidebar-footer">
+<div class="sidebar-user-block">
+<div class="sidebar-user-avatar initial-avatar">E</div>
+<div class="sidebar-user-details">
+<div class="sidebar-user-name">Elena Rostova</div>
+<div class="sidebar-user-email">elena@cybercorp.tokyo</div>
+</div>
+</div>
+<a class="sidebar-logout-link" href="login.html" title="Logout">
+<i class="fa-solid fa-right-from-bracket"></i> Logout
+        </a>
+</div>
+</aside>
+<!-- MAIN DASHBOARD CONTENT AREA -->
+<main class="dashboard-main">
+<!-- TOP NAVBAR -->
+<header class="dashboard-topbar">
+<div class="topbar-left">
+<button class="mobile-sidebar-toggle" id="mobile-sidebar-toggle">
+<i class="fa-solid fa-bars"></i>
+</button>
+<h1 class="topbar-title" data-aos="fade-up" id="topbar-title">Dashboard Overview</h1>
+</div>
+<div class="topbar-right">
+<div class="topbar-user-profile">
+<div class="topbar-user-info">
+<div class="topbar-user-name">Elena Rostova</div>
+<div class="topbar-user-email">elena@cybercorp.tokyo</div>
+</div>
+<div class="topbar-user-avatar initial-avatar">E</div>
+</div>
+</div>
+</header>
+<!-- BODY CONTENT PANELS (TOGGLED VIA SIDEBAR) -->
+<div class="dashboard-body">
+<!-- =================================================================== -->
+<!-- TAB 1: OVERVIEW -->
+<!-- =================================================================== -->
+<section class="dashboard-tab-content active" data-aos="fade-up" id="tab-user-overview">
+<div class="dash-section-header">
+<h2 class="dash-section-title">Overview Dashboard</h2>
+<p class="dash-section-subtitle">Real-time tracking profile of your design projects and creative deliverables.</p>
+</div>
+<!-- Personal Metric Cards with Icons (4-Card Row) -->
+<div class="dash-card-grid">
+<div class="dash-card">
+<div class="dash-card-header">
+<span class="dash-card-title">ACTIVE PROJECTS</span>
+<div class="dash-card-icon"><i class="fa-solid fa-spinner"></i></div>
+</div>
+<div class="dash-card-value" style="color: var(--accent-light);">3</div>
+<div class="dash-card-trend up"><i class="fa-solid fa-clock"></i> 1 in final proofing</div>
+</div>
+<div class="dash-card">
+<div class="dash-card-header">
+<span class="dash-card-title">COMPLETED PROJECTS</span>
+<div class="dash-card-icon"><i class="fa-solid fa-circle-check"></i></div>
+</div>
+<div class="dash-card-value" style="color: #34D399;">8</div>
+<div class="dash-card-trend up"><i class="fa-solid fa-file-arrow-down"></i> Assets archived</div>
+</div>
+<div class="dash-card">
+<div class="dash-card-header">
+<span class="dash-card-title">PENDING REQUESTS</span>
+<div class="dash-card-icon"><i class="fa-solid fa-file-signature"></i></div>
+</div>
+<div class="dash-card-value" style="color: #FBBF24;">1</div>
+<div class="dash-card-trend neutral"><i class="fa-solid fa-hourglass-start"></i> Awaiting proposal</div>
+</div>
+<div class="dash-card">
+<div class="dash-card-header">
+<span class="dash-card-title">UNREAD MESSAGES</span>
+<div class="dash-card-icon"><i class="fa-solid fa-comment-dots"></i></div>
+</div>
+<div class="dash-card-value" style="color: #60A5FA;">4</div>
+<div class="dash-card-trend up"><i class="fa-solid fa-user-pen"></i> From Stackly</div>
+</div>
+</div>
+<!-- Charts Grid -->
+<div class="dash-charts-grid">
+<div class="chart-card" data-aos="fade-up" data-aos-delay="100">
+<div class="chart-card-header">
+<span class="chart-card-title">ACTIVE PROJECT MILESTONE PROGRESS</span>
+<span class="status-badge active">LIVE TRACKING</span>
+</div>
+<div class="chart-container-box">
+<canvas id="chart-user-progress"></canvas>
+</div>
+</div>
+<div class="chart-card" data-aos="fade-up" data-aos-delay="200">
+<div class="chart-card-header">
+<span class="chart-card-title">MY PROJECTS BY STATUS</span>
+<span class="status-badge review">OVERALL SUMMARY</span>
+</div>
+<div class="chart-container-box">
+<canvas id="chart-user-status"></canvas>
+</div>
+</div>
+</div>
+<!-- Client Deliverables Sub-metrics -->
+<div class="dash-subsection-header">
+<i class="fa-solid fa-seedling"></i> Project Impact &amp; Asset Deliverables Metrics
+          </div>
+<div class="dash-submetrics-grid">
+<div class="submetric-card">
+<div class="submetric-label">ESTIMATED ASSET REVISIONS</div>
+<div class="submetric-value">1.4 Tons Output</div>
+</div>
+<div class="submetric-card">
+<div class="submetric-label">BRAND SUITE SECURED</div>
+<div class="submetric-value">28 Units</div>
+</div>
+<div class="submetric-card">
+<div class="submetric-label">PROJECTED 10-YR YIELD</div>
+<div class="submetric-value">14.2 Tons Impact</div>
+</div>
+</div>
+<!-- Current Active Projects Table -->
+<div class="dash-table-card">
+<div class="table-card-header">
+<span class="table-card-title">MY CURRENT DESIGN PROJECTS</span>
+</div>
+<div class="table-responsive">
+<table class="dash-table">
+<thead>
+<tr>
+<th>PROJECT NAME</th>
+<th>SERVICE TYPE</th>
+<th>START DATE</th>
+<th>DEADLINE</th>
+<th>PROGRESS</th>
+<th>STATUS</th>
+<th>ACTION</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Neon Cybernetics Branding</strong></td>
+<td>Brand Identity</td>
+<td>Aug 10, 2026</td>
+<td>Sep 25, 2026</td>
+<td>
+<div class="progress-bar-wrap" style="width: 120px;">
+<div class="progress-bar-fill" style="width: 85%;"></div>
+</div>
+</td>
+<td><span class="status-badge active">In Progress</span></td>
+<td>
+<button class="tbl-action-btn" onclick="window.location.href='404.html';" title="View Proofs"><i class="fa-solid fa-expand"></i></button>
+</td>
+</tr>
+<tr>
+<td><strong>CyberCorp Motion Reel</strong></td>
+<td>Motion Graphics</td>
+<td>Aug 22, 2026</td>
+<td>Oct 05, 2026</td>
+<td>
+<div class="progress-bar-wrap" style="width: 120px;">
+<div class="progress-bar-fill" style="width: 40%;"></div>
+</div>
+</td>
+<td><span class="status-badge in-progress">Storyboarding</span></td>
+<td>
+<button class="tbl-action-btn" onclick="window.location.href='404.html';" title="View Proofs"><i class="fa-solid fa-expand"></i></button>
+</td>
+</tr>
+<tr>
+<td><strong>Tokyo Luxury Matte Box</strong></td>
+<td>3D Packaging</td>
+<td>Sep 01, 2026</td>
+<td>Oct 15, 2026</td>
+<td>
+<div class="progress-bar-wrap" style="width: 120px;">
+<div class="progress-bar-fill" style="width: 20%;"></div>
+</div>
+</td>
+<td><span class="status-badge draft">Concept Review</span></td>
+<td>
+<button class="tbl-action-btn" onclick="window.location.href='404.html';" title="View Proofs"><i class="fa-solid fa-expand"></i></button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Real-Time Activity & Milestone Deadlines Table -->
+<div class="dash-charts-grid">
+<div class="chart-card" data-aos="fade-up" data-aos-delay="300">
+<div class="chart-card-header">
+<span class="chart-card-title">REAL-TIME PORTAL ACTIVITY STREAM</span>
+<span class="status-badge active">LIVE FEED</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 0.85rem;">
+<div style="padding: 0.75rem; background: rgba(255,255,255,0.03); border-radius: 8px; border: 1px solid var(--border-subtle);">
+<div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
+<strong style="color: #fff; font-size: 0.85rem;"><i class="fa-solid fa-file-arrow-up" style="color:var(--accent-light);"></i> Stackly uploaded Vector Package V2</strong>
+<span style="font-size: 0.7rem; color: var(--accent-light);">10 minutes ago</span>
+</div>
+<p style="font-size: 0.78rem; margin:0;">Neon Cybernetics primary logotype &amp; foil dielines available for download.</p>
+</div>
+<div style="padding: 0.75rem; background: rgba(255,255,255,0.03); border-radius: 8px; border: 1px solid var(--border-subtle);">
+<div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
+<strong style="color: #fff; font-size: 0.85rem;"><i class="fa-solid fa-check-circle" style="color:#34D399;"></i> Milestone Phase 3 Approved</strong>
+<span style="font-size: 0.7rem; color: var(--text-secondary);">Yesterday</span>
+</div>
+<p style="font-size: 0.78rem; margin:0;">Brand Guidelines &amp; Typography Matrix signed off by Elena Rostova.</p>
+</div>
+<div style="padding: 0.75rem; background: rgba(255,255,255,0.03); border-radius: 8px; border: 1px solid var(--border-subtle);">
+<div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
+<strong style="color: #fff; font-size: 0.85rem;"><i class="fa-solid fa-film" style="color:#FBBF24;"></i> Motion Keyframes Updated</strong>
+<span style="font-size: 0.7rem; color: var(--text-secondary);">Sep 07, 2026</span>
+</div>
+<p style="font-size: 0.78rem; margin:0;">CyberCorp Motion Reel 60fps title sequence preview updated.</p>
+</div>
+</div>
+</div>
+<div class="dash-card">
+<div class="chart-card-header">
+<span class="chart-card-title">UPCOMING DELIVERABLE DEADLINES</span>
+</div>
+<div class="table-responsive">
+<table class="dash-table" style="font-size:0.8rem;">
+<thead>
+<tr>
+<th>DELIVERABLE</th>
+<th>DUE DATE</th>
+<th>PRIORITY</th>
+<th>STATUS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>3D Box Matte Dielines</strong></td>
+<td>Sep 25, 2026</td>
+<td><span style="color:#EF4444; font-weight:700;">HIGH</span></td>
+<td><span class="status-badge in-progress">In Review</span></td>
+</tr>
+<tr>
+<td><strong>Motion Title Teaser</strong></td>
+<td>Oct 05, 2026</td>
+<td><span style="color:#FBBF24; font-weight:700;">MEDIUM</span></td>
+<td><span class="status-badge active">Active</span></td>
+</tr>
+<tr>
+<td><strong>Final Vector Package</strong></td>
+<td>Oct 15, 2026</td>
+<td><span style="color:#34D399; font-weight:700;">NORMAL</span></td>
+<td><span class="status-badge draft">Scheduled</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+<!-- =================================================================== -->
+<!-- TAB 2: MY PROJECTS -->
+<!-- =================================================================== -->
+<section class="dashboard-tab-content" data-aos="fade-up" id="tab-user-projects">
+<div class="dash-section-header">
+<h2 class="dash-section-title">My Design Projects</h2>
+<p class="dash-section-subtitle">Real-time status tracking, milestone timeline, and design asset file downloads.</p>
+</div>
+<!-- Projects Stat Cards with Icons -->
+<div class="dash-card-grid">
+<div class="dash-card">
+<div class="dash-card-header">
+<span class="dash-card-title">TOTAL PROJECTS</span>
+<div class="dash-card-icon"><i class="fa-solid fa-folder-open"></i></div>
+</div>
+<div class="dash-card-value">12</div>
+</div>
+<div class="dash-card">
+<div class="dash-card-header">
+<span class="dash-card-title">ACTIVE</span>
+<div class="dash-card-icon"><i class="fa-solid fa-spinner"></i></div>
+</div>
+<div class="dash-card-value" style="color: var(--accent-light);">3</div>
+</div>
+<div class="dash-card">
+<div class="dash-card-header">
+<span class="dash-card-title">COMPLETED</span>
+<div class="dash-card-icon"><i class="fa-solid fa-circle-check"></i></div>
+</div>
+<div class="dash-card-value" style="color: #34D399;">8</div>
+</div>
+<div class="dash-card">
+<div class="dash-card-header">
+<span class="dash-card-title">REVISIONS IN REVIEW</span>
+<div class="dash-card-icon"><i class="fa-solid fa-rotate"></i></div>
+</div>
+<div class="dash-card-value" style="color: #FBBF24;">2</div>
+</div>
+</div>
+<!-- Monthly Project Deliverables Chart -->
+<div class="dash-charts-grid full-width">
+<div class="chart-card" data-aos="fade-up" data-aos-delay="400">
+<div class="chart-card-header">
+<span class="chart-card-title">MONTHLY PROJECT MILESTONE DELIVERY TIMELINE (2026)</span>
+<span class="status-badge active">DELIVERY DATA</span>
+</div>
+<div class="chart-container-box">
+<canvas id="chart-user-project-milestones"></canvas>
+</div>
+</div>
+</div>
+<!-- Complete Project Archive Table -->
+<div class="dash-table-card">
+<div class="table-card-header">
+<span class="table-card-title">COMPLETE PROJECT ARCHIVE &amp; MILESTONES</span>
+</div>
+<div class="table-responsive">
+<table class="dash-table">
+<thead>
+<tr>
+<th>PROJECT</th>
+<th>SERVICE</th>
+<th>START DATE</th>
+<th>DEADLINE</th>
+<th>PROGRESS</th>
+<th>STATUS</th>
+<th>ACTIONS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Neon Cybernetics Branding</strong></td>
+<td>Brand Identity</td>
+<td>Aug 10, 2026</td>
+<td>Sep 25, 2026</td>
+<td>
+<div class="progress-bar-wrap" style="width: 100px;">
+<div class="progress-bar-fill" style="width: 85%;"></div>
+</div>
+</td>
+<td><span class="status-badge active">In Progress</span></td>
+<td>
+<button class="tbl-action-btn" onclick="window.location.href='404.html';" title="Download Assets"><i class="fa-solid fa-download"></i></button>
+</td>
+</tr>
+<tr>
+<td><strong>CyberCorp Motion Reel</strong></td>
+<td>Motion Graphics</td>
+<td>Aug 22, 2026</td>
+<td>Oct 05, 2026</td>
+<td>
+<div class="progress-bar-wrap" style="width: 100px;">
+<div class="progress-bar-fill" style="width: 40%;"></div>
+</div>
+</td>
+<td><span class="status-badge in-progress">In Review</span></td>
+<td>
+<button class="tbl-action-btn" onclick="window.location.href='404.html';" title="Download Assets"><i class="fa-solid fa-download"></i></button>
+</td>
+</tr>
+<tr>
+<td><strong>Tokyo Luxury Matte Box</strong></td>
+<td>3D Packaging</td>
+<td>Sep 01, 2026</td>
+<td>Oct 15, 2026</td>
+<td>
+<div class="progress-bar-wrap" style="width: 100px;">
+<div class="progress-bar-fill" style="width: 20%;"></div>
+</div>
+</td>
+<td><span class="status-badge draft">Initial Concept</span></td>
+<td>
+<button class="tbl-action-btn" onclick="window.location.href='404.html';" title="Download Assets"><i class="fa-solid fa-download"></i></button>
+</td>
+</tr>
+<tr>
+<td><strong>Quantum Cloud UI Suite</strong></td>
+<td>Digital UI Design</td>
+<td>Jun 05, 2026</td>
+<td>Jul 20, 2026</td>
+<td>
+<div class="progress-bar-wrap" style="width: 100px;">
+<div class="progress-bar-fill" style="width: 100%;"></div>
+</div>
+</td>
+<td><span class="status-badge completed">Delivered</span></td>
+<td>
+<button class="tbl-action-btn" onclick="window.location.href='404.html';" title="Download Assets"><i class="fa-solid fa-download"></i></button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Project Deliverables & Asset File Library Data Table -->
+<div class="dash-table-card">
+<div class="table-card-header">
+<span class="table-card-title">PROJECT DELIVERABLES &amp; FILE ASSET LIBRARY</span>
+<span class="status-badge completed">SECURE DOWNLOADS</span>
+</div>
+<div class="table-responsive">
+<table class="dash-table">
+<thead>
+<tr>
+<th>ASSET FILE NAME</th>
+<th>FORMAT</th>
+<th>SIZE</th>
+<th>VERSION</th>
+<th>UPLOAD DATE</th>
+<th>ACTION</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Neon_Cybernetics_Master_Logo_Suite.ai</strong></td>
+<td>Vector AI</td>
+<td>42.5 MB</td>
+<td>v2.1</td>
+<td>Sep 08, 2026</td>
+<td><button class="tbl-action-btn" onclick="window.location.href='404.html';" title="Download"><i class="fa-solid fa-download"></i></button></td>
+</tr>
+<tr>
+<td><strong>Tokyo_Box_Embossed_Dieline_Matrix.pdf</strong></td>
+<td>PDF Vector</td>
+<td>18.2 MB</td>
+<td>v1.4</td>
+<td>Sep 05, 2026</td>
+<td><button class="tbl-action-btn" onclick="window.location.href='404.html';" title="Download"><i class="fa-solid fa-download"></i></button></td>
+</tr>
+<tr>
+<td><strong>CyberCorp_Motion_Reel_60fps_ProRes.mov</strong></td>
+<td>MOV ProRes</td>
+<td>480.0 MB</td>
+<td>v1.0</td>
+<td>Aug 30, 2026</td>
+<td><button class="tbl-action-btn" onclick="window.location.href='404.html';" title="Download"><i class="fa-solid fa-download"></i></button></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<!-- =================================================================== -->
+<!-- TAB 3: MESSAGES -->
+<!-- =================================================================== -->
+<section class="dashboard-tab-content" data-aos="fade-up" id="tab-user-messages">
+<div class="dash-section-header">
+<h2 class="dash-section-title">Design Messages</h2>
+<p class="dash-section-subtitle">Direct communications thread, feedback logs, and active designer discussion.</p>
+</div>
+<!-- Communication Metric Cards with Icons -->
+<div class="dash-card-grid">
+<div class="dash-card">
+<div class="dash-card-header">
+<span class="dash-card-title">UNREAD MESSAGES</span>
+<div class="dash-card-icon"><i class="fa-solid fa-comment-dots"></i></div>
+</div>
+<div class="dash-card-value" style="color: #60A5FA;">4</div>
+<div class="dash-card-trend up"><i class="fa-solid fa-user-pen"></i> From Stackly</div>
+</div>
+<div class="dash-card">
+<div class="dash-card-header">
+<span class="dash-card-title">ACTIVE CONVERSATIONS</span>
+<div class="dash-card-icon"><i class="fa-solid fa-comments"></i></div>
+</div>
+<div class="dash-card-value" style="color: var(--accent-light);">3</div>
+<div class="dash-card-trend neutral"><i class="fa-solid fa-circle" style="font-size:0.5rem; color:#34D399;"></i> 2 threads online</div>
+</div>
+<div class="dash-card">
+<div class="dash-card-header">
+<span class="dash-card-title">AVG RESPONSE TIME</span>
+<div class="dash-card-icon"><i class="fa-solid fa-stopwatch"></i></div>
+</div>
+<div class="dash-card-value" style="color: #34D399;">15m</div>
+<div class="dash-card-trend up"><i class="fa-solid fa-bolt"></i> Fast turnaround</div>
+</div>
+<div class="dash-card">
+<div class="dash-card-header">
+<span class="dash-card-title">TOTAL MESSAGES EXCHANGED</span>
+<div class="dash-card-icon"><i class="fa-solid fa-paper-plane"></i></div>
+</div>
+<div class="dash-card-value">142</div>
+<div class="dash-card-trend up"><i class="fa-solid fa-arrow-up"></i> Project active</div>
+</div>
+</div>
+<!-- Weekly Communication Frequency Chart -->
+<div class="dash-charts-grid full-width">
+<div class="chart-card" data-aos="fade-up" data-aos-delay="100">
+<div class="chart-card-header">
+<span class="chart-card-title">WEEKLY DESIGN COMMUNICATION &amp; RESPONSE VELOCITY</span>
+<span class="status-badge active">COMMUNICATION METRICS</span>
+</div>
+<div class="chart-container-box">
+<canvas id="chart-user-message-velocity"></canvas>
+</div>
+</div>
+</div>
+<!-- Messages Log & Thread Directory Table -->
+<div class="dash-table-card">
+<div class="table-card-header">
+<span class="table-card-title">DESIGNER COMMUNICATION THREADS &amp; AUDIT LOG</span>
+</div>
+<div class="table-responsive">
+<table class="dash-table">
+<thead>
+<tr>
+<th>SENDER</th>
+<th>PROJECT CONTEXT</th>
+<th>MESSAGE SUMMARY</th>
+<th>RECEIVED</th>
+<th>STATUS</th>
+<th>ACTION</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Stackly (Lead Designer)</strong></td>
+<td>Neon Cybernetics</td>
+<td>Uploaded primary vector logo suite V2.1 with violet foil dielines.</td>
+<td>10:42 AM Today</td>
+<td><span class="status-badge in-progress">Unread (4)</span></td>
+<td><button class="tbl-action-btn" onclick="window.location.href='404.html';" title="View Thread"><i class="fa-solid fa-eye"></i></button></td>
+</tr>
+<tr>
+<td><strong>Stackly (Lead Designer)</strong></td>
+<td>Tokyo Matte Box</td>
+<td>Adjusted substrate matte black contrast per your Sep 06 notes.</td>
+<td>Yesterday</td>
+<td><span class="status-badge completed">Read</span></td>
+<td><button class="tbl-action-btn" onclick="window.location.href='404.html';" title="View Thread"><i class="fa-solid fa-eye"></i></button></td>
+</tr>
+<tr>
+<td><strong>Studio Support Assistant</strong></td>
+<td>Account Billing</td>
+<td>Invoice #2026-X has been verified &amp; processed cleanly.</td>
+<td>Sep 05, 2026</td>
+<td><span class="status-badge completed">Archived</span></td>
+<td><button class="tbl-action-btn" onclick="window.location.href='404.html';" title="View Thread"><i class="fa-solid fa-eye"></i></button></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Read-Only Real-Time Message Exchange Viewer Card -->
+<div class="dash-card">
+<div class="chart-card-header">
+<span class="chart-card-title">ACTIVE DISCUSSION THREAD: STACKLY (LEAD DESIGNER)</span>
+<span class="status-badge active"><i class="fa-solid fa-circle" style="font-size:0.5rem; color:#34D399;"></i> ONLINE</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 1rem; margin-top: 1rem; max-height: 400px; overflow-y: auto; padding-right: 0.5rem;">
+<div class="msg-bubble received">
+<p>Hi Elena! I've finalized the primary vector logo suite for <strong>Neon Cybernetics</strong> along with the violet foil dielines.</p>
+<div class="msg-time">10:30 AM</div>
+</div>
+<div class="msg-bubble received">
+<p>Please review the updated 3D dieline rendering in your project portal and let me know if you would like any typography adjustments.</p>
+<div class="msg-time">10:32 AM</div>
+</div>
+<div class="msg-bubble sent">
+<p>Thanks Stackly! The 3D render looks stunning. The violet foil texture really elevates the brutalist grid aesthetic.</p>
+<div class="msg-time">10:40 AM</div>
+</div>
+<div class="msg-bubble received">
+<p>Glad you love it! I'm preparing the full asset package now (.AI, .EPS, .SVG, .PDF).</p>
+<div class="msg-time">10:42 AM</div>
+</div>
+</div>
+</div>
+</section>
+<!-- =================================================================== -->
+<!-- TAB 4: SERVICES -->
+<!-- =================================================================== -->
+<section class="dashboard-tab-content" data-aos="fade-up" id="tab-user-services">
+<div class="dash-section-header">
+<h2 class="dash-section-title">Request Services</h2>
+<p class="dash-section-subtitle">Active service contract specifications, turnaround metrics, and service catalog.</p>
+</div>
+<!-- Services Metric Cards with Icons -->
+<div class="dash-card-grid">
+<div class="dash-card">
+<div class="dash-card-header">
+<span class="dash-card-title">ACTIVE CONTRACTS</span>
+<div class="dash-card-icon"><i class="fa-solid fa-file-contract"></i></div>
+</div>
+<div class="dash-card-value" style="color: var(--accent-light);">2</div>
+<div class="dash-card-trend up"><i class="fa-solid fa-circle-check"></i> Enterprise tier</div>
+</div>
+<div class="dash-card">
+<div class="dash-card-header">
+<span class="dash-card-title">SERVICE REQUESTS</span>
+<div class="dash-card-icon"><i class="fa-solid fa-layer-group"></i></div>
+</div>
+<div class="dash-card-value">4</div>
+<div class="dash-card-trend neutral"><i class="fa-solid fa-clock"></i> In pipeline</div>
+</div>
+<div class="dash-card">
+<div class="dash-card-header">
+<span class="dash-card-title">AVG TURNAROUND</span>
+<div class="dash-card-icon"><i class="fa-solid fa-clock"></i></div>
+</div>
+<div class="dash-card-value" style="color: #34D399;">2 Wks</div>
+<div class="dash-card-trend up"><i class="fa-solid fa-bolt"></i> On schedule</div>
+</div>
+<div class="dash-card">
+<div class="dash-card-header">
+<span class="dash-card-title">SATISFACTION RATING</span>
+<div class="dash-card-icon"><i class="fa-solid fa-star"></i></div>
+</div>
+<div class="dash-card-value" style="color: #FBBF24;">5.0</div>
+<div class="dash-card-trend up"><i class="fa-solid fa-thumbs-up"></i> Top rating</div>
+</div>
+</div>
+<!-- Design Service Utilization Breakdown Chart -->
+<div class="dash-charts-grid full-width">
+<div class="chart-card" data-aos="fade-up" data-aos-delay="200">
+<div class="chart-card-header">
+<span class="chart-card-title">DESIGN SERVICE UTILIZATION BREAKDOWN</span>
+<span class="status-badge active">CONTRACT ANALYTICS</span>
+</div>
+<div class="chart-container-box">
+<canvas id="chart-user-service-utilization"></canvas>
+</div>
+</div>
+</div>
+<!-- Active Service Contracts & Scope Breakdown Table -->
+<div class="dash-table-card">
+<div class="table-card-header">
+<span class="table-card-title">ACTIVE SERVICE CONTRACTS &amp; SCOPE SPECIFICATIONS</span>
+</div>
+<div class="table-responsive">
+<table class="dash-table">
+<thead>
+<tr>
+<th>CONTRACT ID</th>
+<th>SERVICE DISCIPLINE</th>
+<th>SCOPE DELIVERABLES</th>
+<th>BILLING TIER</th>
+<th>DELIVERY DATE</th>
+<th>STATUS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>CTR-2026-01</strong></td>
+<td>Brand Identity &amp; Guidelines</td>
+<td>Master Vector Suite, Dieline Specs, Swatch Palette</td>
+<td>Enterprise Retainer</td>
+<td>Sep 25, 2026</td>
+<td><span class="status-badge active">Active Contract</span></td>
+</tr>
+<tr>
+<td><strong>CTR-2026-02</strong></td>
+<td>3D Packaging &amp; Dielines</td>
+<td>Tactile Matte Box 3D Render &amp; Stamping Specs</td>
+<td>Fixed Project</td>
+<td>Oct 15, 2026</td>
+<td><span class="status-badge active">Active Contract</span></td>
+</tr>
+<tr>
+<td><strong>CTR-2025-88</strong></td>
+<td>Digital UI Component Suite</td>
+<td>Figma Dark Mode Design System Architecture</td>
+<td>Fixed Project</td>
+<td>Jul 20, 2026</td>
+<td><span class="status-badge completed">Delivered</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Available Graphic Design Service Catalog Display -->
+<div style="margin-bottom: 1.5rem; margin-top: 2rem;">
+<h3 style="font-family:var(--font-display); color:#fff; font-size:1.2rem;">GRAPHIC DESIGN SERVICE DISCIPLINE CATALOG</h3>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+<div class="dash-card">
+<i class="fa-solid fa-bezier-curve" style="font-size: 2rem; color: var(--accent-light); margin-bottom: 1rem;"></i>
+<h4 style="color:#fff; font-family:var(--font-display); font-size:1.1rem; margin-bottom:0.5rem;">BRAND IDENTITY SYSTEM</h4>
+<p style="font-size:0.82rem; color:var(--text-secondary); margin-bottom:1rem;">Complete logo architecture, typography matrices, color systems, and comprehensive brand guidelines.</p>
+<div style="font-family:var(--font-display); font-size:0.8rem; color:#34D399; font-weight:700;">Tier: $3,500 – $8,000 • 2–4 Wks Turnaround</div>
+</div>
+<div class="dash-card">
+<i class="fa-solid fa-cube" style="font-size: 2rem; color: #34D399; margin-bottom: 1rem;"></i>
+<h4 style="color:#fff; font-family:var(--font-display); font-size:1.1rem; margin-bottom:0.5rem;">3D &amp; PACKAGING DESIGN</h4>
+<p style="font-size:0.82rem; color:var(--text-secondary); margin-bottom:1rem;">Tactile luxury packaging, foil die-stamping specs, 3D product renders, and unboxing UX.</p>
+<div style="font-family:var(--font-display); font-size:0.8rem; color:#34D399; font-weight:700;">Tier: $3,000 – $7,500 • 2–3 Wks Turnaround</div>
+</div>
+<div class="dash-card">
+<i class="fa-solid fa-film" style="font-size: 2rem; color: #FBBF24; margin-bottom: 1rem;"></i>
+<h4 style="color:#fff; font-family:var(--font-display); font-size:1.1rem; margin-bottom:0.5rem;">MOTION GRAPHICS &amp; REELS</h4>
+<p style="font-size:0.82rem; color:var(--text-secondary); margin-bottom:1rem;">Kinetic typography, animated brand teasers, film title sequences, and social motion assets.</p>
+<div style="font-family:var(--font-display); font-size:0.8rem; color:#34D399; font-weight:700;">Tier: $2,500 – $6,000 • 2 Wks Turnaround</div>
+</div>
+<div class="dash-card">
+<i class="fa-solid fa-layer-group" style="font-size: 2rem; color: #60A5FA; margin-bottom: 1rem;"></i>
+<h4 style="color:#fff; font-family:var(--font-display); font-size:1.1rem; margin-bottom:0.5rem;">DIGITAL UI &amp; LANDING PAGES</h4>
+<p style="font-size:0.82rem; color:var(--text-secondary); margin-bottom:1rem;">Editorial digital experiences, dark mode component systems, and web visual architecture.</p>
+<div style="font-family:var(--font-display); font-size:0.8rem; color:#34D399; font-weight:700;">Tier: $4,000 – $10,000 • 3–5 Wks Turnaround</div>
+</div>
+</div>
+</section>
+<!-- =================================================================== -->
+<!-- TAB 5: PROFILE -->
+<!-- =================================================================== -->
+<section class="dashboard-tab-content" data-aos="fade-up" id="tab-user-profile">
+<div class="dash-section-header">
+<h2 class="dash-section-title">Account Profile</h2>
+<p class="dash-section-subtitle">Account specifications, verified client data, cloud storage allocation, and security audit log.</p>
+</div>
+<div class="profile-card-grid">
+<!-- Left Profile Sidebar Card -->
+<div class="profile-sidebar-card">
+<div class="profile-avatar-lg initial-avatar-lg">E</div>
+<h3 style="font-family:var(--font-display); color:#fff; font-size:1.2rem;">Elena Rostova</h3>
+<p id="profile-user-role-subtitle" style="color:var(--accent-light); font-size:0.8rem; margin-bottom:1rem;">Role: USER // Client Portal</p>
+<div style="padding:0.75rem; background:rgba(255,255,255,0.03); border-radius:10px; border:1px solid var(--border-subtle); margin-bottom:1.25rem; font-size:0.8rem; color:var(--text-secondary);">
+                Active Enterprise Client since 2025
+              </div>
+<div style="text-align:left; font-size:0.8rem; display:flex; flex-direction:column; gap:0.75rem;">
+<div>
+<div style="display:flex; justify-content:space-between; margin-bottom:0.35rem;">
+<span style="color:var(--text-secondary);"><i class="fa-solid fa-cloud" style="color:var(--accent); margin-right:0.35rem;"></i> Storage Allocated:</span>
+<strong style="color:#fff; margin-left:auto;">45.2 GB / 100 GB</strong>
+</div>
+<div class="progress-bar-wrap">
+<div class="progress-bar-fill" style="width: 45%;"></div>
+</div>
+</div>
+<hr style="border:0; border-top:1px solid var(--border-subtle); margin:0.35rem 0;"/>
+<div style="display:flex; justify-content:space-between; align-items:center;">
+<span style="color:var(--text-secondary);"><i class="fa-solid fa-shield-halved" style="color:#34D399; margin-right:0.35rem;"></i> Account Security:</span>
+<span class="status-badge completed" style="font-size:0.7rem; padding:0.2rem 0.6rem;">2FA Active</span>
+</div>
+<div style="display:flex; justify-content:space-between; align-items:center;">
+<span style="color:var(--text-secondary);"><i class="fa-solid fa-user-gear" style="color:var(--accent-light); margin-right:0.35rem;"></i> Lead Art Director:</span>
+<strong style="color:#fff;">Stackly</strong>
+</div>
+<div style="display:flex; justify-content:space-between; align-items:center;">
+<span style="color:var(--text-secondary);"><i class="fa-solid fa-diagram-project" style="color:#60A5FA; margin-right:0.35rem;"></i> Active Projects:</span>
+<strong style="color:#60A5FA;">3 Running</strong>
+</div>
+<div style="display:flex; justify-content:space-between; align-items:center;">
+<span style="color:var(--text-secondary);"><i class="fa-solid fa-headset" style="color:#FBBF24; margin-right:0.35rem;"></i> Portal SLA Tier:</span>
+<span class="status-badge active" style="font-size:0.7rem; padding:0.2rem 0.6rem;">24/7 VIP Priority</span>
+</div>
+<div style="display:flex; justify-content:space-between; align-items:center;">
+<span style="color:var(--text-secondary);"><i class="fa-solid fa-lock" style="color:#34D399; margin-right:0.35rem;"></i> Encryption:</span>
+<strong style="color:#34D399; font-size:0.75rem;">TLS 1.3 / AES-256</strong>
+</div>
+</div>
+</div>
+<!-- Right Profile Account Data & Audit Table -->
+<div class="dash-card">
+<div class="chart-card-header">
+<span class="chart-card-title">ACCOUNT SPECIFICATIONS &amp; CLIENT DATA</span>
+<span class="status-badge completed">VERIFIED CLIENT</span>
+</div>
+<div class="table-responsive" style="margin-top: 1rem;">
+<table class="dash-table">
+<thead>
+<tr>
+<th>SPECIFICATION</th>
+<th>DETAILS &amp; VALUE</th>
+<th>STATUS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Full Client Name</strong></td>
+<td>Elena Rostova</td>
+<td><span class="status-badge completed">Verified</span></td>
+</tr>
+<tr>
+<td><strong>Email Address</strong></td>
+<td id="profile-user-email">elena@cybercorp.tokyo</td>
+<td><span class="status-badge completed">Encrypted</span></td>
+</tr>
+<tr>
+<td><strong>Selected Login Role</strong></td>
+<td><span class="status-badge active" id="profile-user-role-badge">USER</span></td>
+<td><span class="status-badge completed">Active Session</span></td>
+</tr>
+<tr>
+<td><strong>Company / Brand</strong></td>
+<td>CyberCorp Tokyo Inc.</td>
+<td><span class="status-badge active">Enterprise</span></td>
+</tr>
+<tr>
+<td><strong>Direct Phone Contact</strong></td>
+<td>+81 3 5555 0192</td>
+<td><span class="status-badge completed">Confirmed</span></td>
+</tr>
+<tr>
+<td><strong>Location &amp; Timezone</strong></td>
+<td>Tokyo, Japan (JST / UTC+9)</td>
+<td><span class="status-badge completed">Primary</span></td>
+</tr>
+<tr>
+<td><strong>Contract Access Tier</strong></td>
+<td>Full 3D &amp; Brand Identity Access</td>
+<td><span class="status-badge active">Active Contract</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- Monthly Storage Growth Chart & IP License Rights Table -->
+<div class="dash-charts-grid" style="margin-top: 1.5rem;">
+<div class="chart-card" data-aos="fade-up" data-aos-delay="300">
+<div class="chart-card-header">
+<span class="chart-card-title">MONTHLY PORTAL CLOUD STORAGE &amp; ASSET GROWTH</span>
+<span class="status-badge active">STORAGE METRICS</span>
+</div>
+<div class="chart-container-box">
+<canvas id="chart-user-storage-growth"></canvas>
+</div>
+</div>
+<div class="chart-card" data-aos="fade-up" data-aos-delay="400">
+<div class="chart-card-header">
+<span class="chart-card-title">BRAND ASSET IP &amp; COMMERCIAL LICENSES</span>
+</div>
+<div class="table-responsive">
+<table class="dash-table" style="font-size:0.78rem;">
+<thead>
+<tr>
+<th>BRAND ASSET</th>
+<th>LICENSE TYPE</th>
+<th>GRANT DATE</th>
+<th>STATUS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Neon Cybernetics Logo Suite</strong></td>
+<td>Full Commercial Ownership Transfer</td>
+<td>Sep 08, 2026</td>
+<td><span class="status-badge completed">Granted</span></td>
+</tr>
+<tr>
+<td><strong>CyberCorp Motion Title Reel</strong></td>
+<td>Worldwide Broadcast Rights</td>
+<td>Aug 30, 2026</td>
+<td><span class="status-badge completed">Granted</span></td>
+</tr>
+<tr>
+<td><strong>Tokyo Box Dielines</strong></td>
+<td>Manufacturing License</td>
+<td>Aug 25, 2026</td>
+<td><span class="status-badge completed">Granted</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- Security Audit Log Table -->
+<div class="dash-table-card" style="margin-top: 1.5rem;">
+<div class="table-card-header">
+<span class="table-card-title">SECURITY &amp; ACCESS AUDIT TRAIL</span>
+</div>
+<div class="table-responsive">
+<table class="dash-table" style="font-size:0.78rem;">
+<thead>
+<tr>
+<th>EVENT</th>
+<th>TIMESTAMP</th>
+<th>IP ADDRESS</th>
+<th>LOCATION</th>
+<th>STATUS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Portal Session Login</td>
+<td>Sep 09, 2026 - 15:42 JST</td>
+<td>192.168.1.104</td>
+<td>Tokyo, JP</td>
+<td><span class="status-badge completed">Authorized</span></td>
+</tr>
+<tr>
+<td>Vector Asset Package Downloaded</td>
+<td>Sep 08, 2026 - 11:20 JST</td>
+<td>192.168.1.104</td>
+<td>Tokyo, JP</td>
+<td><span class="status-badge completed">Authorized</span></td>
+</tr>
+<tr>
+<td>Passphrase Auth Check</td>
+<td>Aug 28, 2026 - 09:15 JST</td>
+<td>192.168.1.104</td>
+<td>Tokyo, JP</td>
+<td><span class="status-badge completed">Authorized</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+</div>
+</main>
+</div>
+<!-- Dashboard JavaScript & Engine -->
+<script src="main.js"></script>
+<script src="dashboard.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+</body>
+</html>

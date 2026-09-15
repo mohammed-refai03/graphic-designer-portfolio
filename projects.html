@@ -1,0 +1,1354 @@
+<!doctype html>
+
+<html class="dark" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>PROJECTS — STACKLY | Selected Work &amp; Visual Exhibition</title>
+    <meta
+      content="Explore selected work, brand identity architectures, editorial typography, motion graphics, 3D visual staging, and experimental design projects by Stackly."
+      name="description"
+    />
+    <!-- Google Fonts: Space Grotesk (Display) & Inter (Body) -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=Space+Grotesk:wght@400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <!-- FontAwesome Icons -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <!-- Main CSS -->
+    <link href="styles.css" rel="stylesheet" />
+    <!-- GSAP & ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <!-- Three.js for 3D Project Worlds selective rendering -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="projects-page">
+    <!-- PRELOADER -->
+    <div aria-hidden="true" class="preloader" id="preloader">
+      <div class="preloader-glow"></div>
+      <div class="preloader-content">
+        <div class="preloader-logo-wrapper">
+          <div class="preloader-ring"></div>
+          <img
+            alt="STACKLY Logo"
+            class="preloader-logo-img"
+            src="assets/logo.webp"
+          />
+        </div>
+        <div class="preloader-title">STACKLY</div>
+        <div class="preloader-sub">CREATIVE STUDIO</div>
+        <div class="preloader-track">
+          <div class="preloader-fill" id="preloader-fill"></div>
+        </div>
+        <div class="preloader-counter" id="preloader-counter">0%</div>
+      </div>
+      <script>
+        (function () {
+          document.body.style.overflow = "hidden";
+          var fill = document.getElementById("preloader-fill");
+          var counter = document.getElementById("preloader-counter");
+          var preloader = document.getElementById("preloader");
+          var start = Date.now();
+          var duration = 2000;
+          var done = false;
+
+          function finish() {
+            if (done) return;
+            done = true;
+            if (fill) fill.style.width = "100%";
+            if (counter) counter.textContent = "100%";
+            setTimeout(function () {
+              if (preloader) preloader.classList.add("preloader-hidden");
+              document.body.style.overflow = "";
+              setTimeout(function () {
+                if (preloader && preloader.parentNode)
+                  preloader.style.display = "none";
+              }, 600);
+            }, 150);
+          }
+
+          function tick() {
+            if (done) return;
+            var elapsed = Date.now() - start;
+            var pct = Math.min(100, Math.floor((elapsed / duration) * 100));
+            if (fill) fill.style.width = pct + "%";
+            if (counter) counter.textContent = pct + "%";
+            if (pct < 100) {
+              requestAnimationFrame(tick);
+            } else {
+              finish();
+            }
+          }
+          requestAnimationFrame(tick);
+          setTimeout(finish, 2200);
+        })();
+      </script>
+    </div>
+    <!-- Custom Kinetic Interactive Cursor -->
+    <div class="custom-cursor" id="custom-cursor"></div>
+    <div class="cursor-follower" id="cursor-follower">
+      <span class="cursor-label">EXPLORE</span>
+    </div>
+    <!-- NAVBAR -->
+    <header class="navbar" id="navbar">
+      <div class="nav-container">
+                <a class="nav-logo magnetic-btn" href="index.html">
+          <img alt="STACKLY" class="brand-logo-img" src="assets/logo.webp" />
+        </a>
+        <nav class="nav-menu">
+          <ul class="nav-links">
+            <li>
+              <a class="nav-link" data-magnetic="" href="index.html">Home</a>
+            </li>
+            <li>
+              <a class="nav-link active" data-magnetic="" href="projects.html"
+                >Projects</a
+              >
+            </li>
+            <li>
+              <a class="nav-link" data-magnetic="" href="about.html">About</a>
+            </li>
+            <li>
+              <a class="nav-link" data-magnetic="" href="services.html"
+                >Services</a
+              >
+            </li>
+            <li>
+              <a class="nav-link" data-magnetic="" href="blog.html">Blog</a>
+            </li>
+            <li>
+              <a class="nav-link" data-magnetic="" href="contact.html"
+                >Contact</a
+              >
+            </li>
+          </ul>
+          <div class="nav-indicator"></div>
+        </nav>
+        <div class="nav-actions">
+          <a
+            class="btn btn-glass btn-sm magnetic-btn"
+            data-cursor="hover"
+            href="login.html"
+          >
+            <i class="fa-solid fa-right-to-bracket"></i> Login
+          </a>
+          <button
+            aria-label="Toggle Mobile Menu"
+            class="hamburger-btn"
+            id="hamburger-toggle"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+      </div>
+    </header>
+    <!-- MOBILE FULLSCREEN NAVIGATION OVERLAY -->
+    <div class="mobile-nav-overlay" id="mobile-nav">
+      <div class="mobile-nav-content">
+        <div class="mobile-nav-header">
+          <a class="nav-logo" href="index.html">
+            <img src="assets/logo.webp" alt="STACKLY Logo" class="brand-logo-img"/>
+          </a>
+          <button class="close-mobile-btn" id="close-mobile-nav" aria-label="Close Navigation Menu">×</button>
+        </div>
+        <ul class="mobile-nav-links">
+          <li><a class="mobile-link" href="index.html">Home</a></li>
+          <li><a class="mobile-link active" href="projects.html">Projects</a></li>
+          <li><a class="mobile-link" href="about.html">About</a></li>
+          <li><a class="mobile-link" href="services.html">Services</a></li>
+          <li><a class="mobile-link" href="blog.html">Blog</a></li>
+          <li><a class="mobile-link" href="contact.html">Contact</a></li>
+        </ul>
+        <div class="mobile-nav-footer">
+          <a href="login.html" class="mobile-login-btn">
+            Login <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+    <!-- MAIN SCROLL CONTAINER -->
+    <main class="snap-container" id="main-content">
+      <!-- 01. PROJECTS HERO BANNER SECTION -->
+      <section
+        class="snap-section page-hero-banner"
+        data-aos="fade-up"
+        id="projects-hero"
+      >
+        <div class="hero-2d-backdrop">
+          <div class="grid-line line-v1"></div>
+          <div class="grid-line line-v2"></div>
+          <div class="grid-line line-h1"></div>
+          <div class="vector-circle circle-1"></div>
+          <div class="vector-circle circle-2"></div>
+        </div>
+        <div class="section-container">
+          <div class="hero-banner-content text-center">
+            <span
+              class="hero-eyebrow"
+              style="
+                margin-bottom: 1rem;
+                display: inline-flex;
+                align-items: center;
+                gap: 0.5rem;
+                color: var(--accent);
+                font-family: var(--font-display);
+                font-size: 0.8rem;
+                font-weight: 700;
+                letter-spacing: 2px;
+              "
+              ><i class="fa-solid fa-layer-group"></i> SELECTED WORK &amp;
+              COMMISSIONS</span
+            >
+            <h1 class="hero-title kinetic-title reveal-text">
+              PROJECTS <span class="violet-highlight">EXHIBITION</span>
+            </h1>
+            <p class="hero-description reveal-paragraph margin-center">
+              Crafting disruptive brand identity systems, publication layouts,
+              kinetic motion direction, 3D staging, and experimental visual
+              architectures for visionaries worldwide.
+            </p>
+           
+          </div>
+        </div>
+      </section>
+      <!-- 02. FEATURED PROJECT (SPOTLIGHT) -->
+      <section
+        class="snap-section featured-project-section"
+        data-aos="fade-up"
+        id="featured-project"
+      >
+        <div class="section-container">
+          <div class="section-header">
+            <span class="section-num"> SPOTLIGHT COMMISSION</span>
+            <h2 class="section-title">FEATURED CASE STUDY</h2>
+            <p class="section-subtitle">
+              An unconventional visual transformation combining spatial vector
+              identity, quantum typography, and WebGL depth.
+            </p>
+          </div>
+          <div
+            class="featured-project-card glass-panel"
+            data-aos="fade-up"
+            data-aos-delay="200"
+          >
+            <div
+              class="featured-img-wrap"
+              data-aos="zoom-in"
+              data-aos-delay="150"
+              data-cursor="hover"
+            >
+              <img
+                alt="Neon Cybernetics Branding System and Quantum Tech Logo Matrix"
+                class="featured-img parallax-img"
+                src="assets/project-neon-cybernetics.webp"
+              />
+              <div class="featured-img-tag">
+                <i class="fa-solid fa-crown"></i> BRAND IDENTITY / VECTOR SYSTEM
+              </div>
+            </div>
+            <div class="featured-content-wrap">
+              <div class="featured-meta">
+                <span class="f-year">2025</span>
+                <span class="f-category">TOKYO // QUANTUM TECH</span>
+              </div>
+              <h3 class="featured-title">NEON CYBERNETICS</h3>
+              <p class="featured-desc">
+                Developed a comprehensive spatial 2D branding system and logo
+                matrix for a quantum computing startup in Tokyo. Built on
+                mathematical grid ratios, high-density dark surfaces, and neon
+                violet variable typography.
+              </p>
+              <div class="featured-tools-row">
+                <span class="tool-chip"
+                  ><i class="fa-solid fa-pen-nib"></i> Vector Illustrator</span
+                >
+                <span class="tool-chip"
+                  ><i class="fa-solid fa-cube"></i> Cinema 4D</span
+                >
+                <span class="tool-chip"
+                  ><i class="fa-solid fa-code"></i> WebGL / CSS</span
+                >
+                <span class="tool-chip"
+                  ><i class="fa-solid fa-sliders"></i> Variable Type</span
+                >
+              </div>
+              <div class="featured-actions">
+                <a
+                  class="btn btn-primary btn-xl"
+                  data-cursor="hover"
+                  href="404.html"
+                >
+                  <span>VIEW CASE STUDY</span>
+                  <i class="fa-solid fa-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    
+      <!-- 04 & 05. PROJECT EXHIBITION (EXPERIMENTAL GALLERY & HOVER EXPERIENCE) -->
+      <section
+        class="snap-section exhibition-section"
+        data-aos="fade-up"
+        id="project-exhibition"
+      >
+        <div class="section-container">
+          <div class="section-header">
+            <span class="section-num">EXHIBITION GALLERY</span>
+            <h2 class="section-title">CURATED COMMISSIONS</h2>
+            <p class="section-subtitle">
+              High-contrast 3-column grid layout featuring full-width visual
+              assets, typography, and interactive hover previews.
+            </p>
+          </div>
+          <div class="exhibition-gallery-grid" id="exhibition-gallery">
+            <!-- Project Item 1 -->
+            <div
+              class="ex-card glass-panel"
+              data-aos="fade-up"
+              data-aos-delay="100"
+              data-category="branding 3d graphic"
+            >
+              <div
+                class="ex-card-img-wrap"
+                data-aos="zoom-in"
+                data-aos-delay="150"
+                data-cursor="hover"
+              >
+                <img
+                  alt="Neon Cybernetics Branding System"
+                  class="ex-img"
+                  src="assets/project-neon-cybernetics.webp"
+                />
+                <div class="ex-overlay-info">
+                  <span class="ex-cat">BRANDING // 3D</span>
+                  <h4>NEON CYBERNETICS</h4>
+                  <p>Tokyo Quantum Tech Branding System &amp; Logo Matrix.</p>
+                </div>
+              </div>
+              <div class="ex-card-body">
+                <div class="ex-meta-row">
+                  <span class="ex-title">NEON CYBERNETICS</span>
+                  <span class="ex-year">2025</span>
+                </div>
+                <p class="ex-desc">
+                  Spatial vector identity system engineered with mathematical
+                  grid ratios and WebGL depth.
+                </p>
+                <a class="btn btn-glass btn-sm" href="404.html">
+                  <span>EXPLORE PROJECT</span>
+                  <i class="fa-solid fa-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+            <!-- Project Item 2 -->
+            <div
+              class="ex-card glass-panel"
+              data-aos="fade-up"
+              data-aos-delay="200"
+              data-category="poster graphic motion"
+            >
+              <div
+                class="ex-card-img-wrap"
+                data-aos="zoom-in"
+                data-aos-delay="150"
+                data-cursor="hover"
+              >
+                <img
+                  alt="Synthesis Editorial Magazine Design"
+                  class="ex-img"
+                  src="assets/project-synthesis-editorial.webp"
+                />
+                <div class="ex-overlay-info">
+                  <span class="ex-cat">POSTER // EDITORIAL</span>
+                  <h4>SYNTHESIS EDITORIAL</h4>
+                  <p>High-Fashion Publication &amp; Kinetic Display Type.</p>
+                </div>
+              </div>
+              <div class="ex-card-body">
+                <div class="ex-meta-row">
+                  <span class="ex-title">SYNTHESIS EDITORIAL</span>
+                  <span class="ex-year">2025</span>
+                </div>
+                <p class="ex-desc">
+                  180-page hardcover publication combining brutalist grid
+                  architecture with kinetic fonts.
+                </p>
+                <a class="btn btn-glass btn-sm" href="404.html">
+                  <span>EXPLORE PROJECT</span>
+                  <i class="fa-solid fa-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+            <!-- Project Item 3 -->
+            <div
+              class="ex-card glass-panel"
+              data-aos="fade-up"
+              data-aos-delay="300"
+              data-category="packaging graphic"
+            >
+              <div
+                class="ex-card-img-wrap"
+                data-aos="zoom-in"
+                data-aos-delay="150"
+                data-cursor="hover"
+              >
+                <img
+                  alt="Kinetic Packaging Box Dielines"
+                  class="ex-img"
+                  src="assets/project-kinetic-packaging.webp"
+                />
+                <div class="ex-overlay-info">
+                  <span class="ex-cat">PACKAGING // DIELINES</span>
+                  <h4>KINETIC PACKAGING</h4>
+                  <p>Matte Velvet Black Box Dielines &amp; Metallic Foil.</p>
+                </div>
+              </div>
+              <div class="ex-card-body">
+                <div class="ex-meta-row">
+                  <span class="ex-title">KINETIC PACKAGING</span>
+                  <span class="ex-year">2024</span>
+                </div>
+                <p class="ex-desc">
+                  Tactile product structural packaging architecture for luxury
+                  cyber-wear accessories.
+                </p>
+                <a class="btn btn-glass btn-sm" href="404.html">
+                  <span>EXPLORE PROJECT</span>
+                  <i class="fa-solid fa-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+            <!-- Project Item 4 -->
+            <div
+              class="ex-card glass-panel"
+              data-aos="fade-up"
+              data-aos-delay="400"
+              data-category="ui graphic"
+            >
+              <div
+                class="ex-card-img-wrap"
+                data-aos="zoom-in"
+                data-aos-delay="150"
+                data-cursor="hover"
+              >
+                <img
+                  alt="Nebula UI Dark Mode Dashboard"
+                  class="ex-img"
+                  src="assets/project-nebula-ui.webp"
+                />
+                <div class="ex-overlay-info">
+                  <span class="ex-cat">UI // DIGITAL</span>
+                  <h4>NEBULA UI SYSTEM</h4>
+                  <p>Dark Mode Component Grid &amp; High-Density Dashboard.</p>
+                </div>
+              </div>
+              <div class="ex-card-body">
+                <div class="ex-meta-row">
+                  <span class="ex-title">NEBULA UI SYSTEM</span>
+                  <span class="ex-year">2024</span>
+                </div>
+                <p class="ex-desc">
+                  Component-driven graphic interface system engineered for
+                  real-time financial metrics.
+                </p>
+                <a class="btn btn-glass btn-sm" href="404.html">
+                  <span>EXPLORE PROJECT</span>
+                  <i class="fa-solid fa-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+            <!-- Project Item 5 -->
+            <div
+              class="ex-card glass-panel"
+              data-aos="fade-up"
+              data-aos-delay="100"
+              data-category="3d motion experimental"
+            >
+              <div
+                class="ex-card-img-wrap"
+                data-aos="zoom-in"
+                data-aos-delay="150"
+                data-cursor="hover"
+              >
+                <img
+                  alt="Metaverse Art Direction Spatial Staging"
+                  class="ex-img"
+                  src="assets/project-metaverse-art.webp"
+                />
+                <div class="ex-overlay-info">
+                  <span class="ex-cat">3D // ART DIRECTION</span>
+                  <h4>METAVERSE ART DIRECTION</h4>
+                  <p>Spatial 2D Exhibition Staging &amp; 3D Vector Renders.</p>
+                </div>
+              </div>
+              <div class="ex-card-body">
+                <div class="ex-meta-row">
+                  <span class="ex-title">METAVERSE EXHIBITION</span>
+                  <span class="ex-year">2026</span>
+                </div>
+                <p class="ex-desc">
+                  Full graphic direction and exhibition staging for digital art
+                  gallery releases.
+                </p>
+                <a class="btn btn-glass btn-sm" href="404.html">
+                  <span>EXPLORE PROJECT</span>
+                  <i class="fa-solid fa-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+            <!-- Project Item 6 -->
+            <div
+              class="ex-card glass-panel"
+              data-aos="fade-up"
+              data-aos-delay="200"
+              data-category="poster graphic experimental"
+            >
+              <div
+                class="ex-card-img-wrap"
+                data-aos="zoom-in"
+                data-aos-delay="150"
+                data-cursor="hover"
+              >
+                <img
+                  alt="Hyper-Kinetic Brutalist Poster Series"
+                  class="ex-img"
+                  src="assets/project-poster-series.webp"
+                />
+                <div class="ex-overlay-info">
+                  <span class="ex-cat">POSTER // EXPERIMENTAL</span>
+                  <h4>HYPER-KINETIC POSTER SERIES</h4>
+                  <p>Brutalist Typography &amp; Vector Grid Stretching.</p>
+                </div>
+              </div>
+              <div class="ex-card-body">
+                <div class="ex-meta-row">
+                  <span class="ex-title">HYPER-KINETIC POSTERS</span>
+                  <span class="ex-year">2025</span>
+                </div>
+                <p class="ex-desc">
+                  Experimental poster collection pushing typography
+                  interpolation and contrast to limits.
+                </p>
+                <a class="btn btn-glass btn-sm" href="404.html">
+                  <span>EXPLORE PROJECT</span>
+                  <i class="fa-solid fa-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+            <!-- Project Item 7 -->
+            <div
+              class="ex-card glass-panel"
+              data-aos="fade-up"
+              data-aos-delay="300"
+              data-category="social graphic"
+            >
+              <div
+                class="ex-card-img-wrap"
+                data-aos="zoom-in"
+                data-aos-delay="150"
+                data-cursor="hover"
+              >
+                <img
+                  alt="Luxury Social Media Motion Campaign"
+                  class="ex-img"
+                  src="assets/project-social-campaign.webp"
+                />
+                <div class="ex-overlay-info">
+                  <span class="ex-cat">SOCIAL MEDIA // CAMPAIGN</span>
+                  <h4>LUXURY SOCIAL CAMPAIGN</h4>
+                  <p>High-Contrast Digital Assets &amp; Teaser Motion.</p>
+                </div>
+              </div>
+              <div class="ex-card-body">
+                <div class="ex-meta-row">
+                  <span class="ex-title">LUXURY SOCIAL CAMPAIGN</span>
+                  <span class="ex-year">2025</span>
+                </div>
+                <p class="ex-desc">
+                  Cohesive campaign graphics and promotional teaser assets
+                  engineered for high engagement.
+                </p>
+                <a class="btn btn-glass btn-sm" href="404.html">
+                  <span>EXPLORE PROJECT</span>
+                  <i class="fa-solid fa-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+            <!-- Project Item 8 -->
+            <div
+              class="ex-card glass-panel"
+              data-aos="fade-up"
+              data-aos-delay="400"
+              data-category="branding graphic"
+            >
+              <div
+                class="ex-card-img-wrap"
+                data-aos="zoom-in"
+                data-aos-delay="150"
+                data-cursor="hover"
+              >
+                <img
+                  alt="Quantum Brand Strategy Monograph"
+                  class="ex-img"
+                  src="assets/project-brand-monograph.webp"
+                />
+                <div class="ex-overlay-info">
+                  <span class="ex-cat">BRANDING // PRINT</span>
+                  <h4>QUANTUM BRAND MONOGRAPH</h4>
+                  <p>
+                    Comprehensive Hardcover Guidelines &amp; Vector Grid Matrix.
+                  </p>
+                </div>
+              </div>
+              <div class="ex-card-body">
+                <div class="ex-meta-row">
+                  <span class="ex-title">QUANTUM BRAND MONOGRAPH</span>
+                  <span class="ex-year">2025</span>
+                </div>
+                <p class="ex-desc">
+                  240-page master visual identity guidelines and vector brand
+                  specifications handbook.
+                </p>
+                <a class="btn btn-glass btn-sm" href="404.html">
+                  <span>EXPLORE PROJECT</span>
+                  <i class="fa-solid fa-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+            <!-- Project Item 9 -->
+            <div
+              class="ex-card glass-panel"
+              data-aos="fade-up"
+              data-aos-delay="100"
+              data-category="motion poster experimental"
+            >
+              <div
+                class="ex-card-img-wrap"
+                data-aos="zoom-in"
+                data-aos-delay="150"
+                data-cursor="hover"
+              >
+                <img
+                  alt="Cyber-Fashion Lookbook Digital Publication"
+                  class="ex-img"
+                  src="assets/project-cyber-lookbook.webp"
+                />
+                <div class="ex-overlay-info">
+                  <span class="ex-cat">EDITORIAL // MOTION</span>
+                  <h4>CYBER-FASHION LOOKBOOK</h4>
+                  <p>Digital Publication &amp; Kinetic Motion Titles.</p>
+                </div>
+              </div>
+              <div class="ex-card-body">
+                <div class="ex-meta-row">
+                  <span class="ex-title">CYBER-FASHION LOOKBOOK</span>
+                  <span class="ex-year">2026</span>
+                </div>
+                <p class="ex-desc">
+                  High-contrast digital lookbook pairing kinetic typography
+                  title loops with editorial photography.
+                </p>
+                <a class="btn btn-glass btn-sm" href="404.html">
+                  <span>EXPLORE PROJECT</span>
+                  <i class="fa-solid fa-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- 11. PROJECT ARCHIVE (COMPACT EDITORIAL LIST) -->
+      <section
+        class="snap-section archive-section"
+        data-aos="fade-up"
+        id="project-archive"
+      >
+        <div class="section-container">
+          <div class="section-header">
+            <span class="section-num">INDEX ARCHIVE</span>
+            <h2 class="section-title">FULL COMMISSIONS ARCHIVE</h2>
+            <p class="section-subtitle">
+              Complete chronological record of visual identity systems,
+              publications, and digital surfaces.
+            </p>
+          </div>
+          <div
+            class="archive-list-wrapper glass-panel"
+            data-aos="fade-up"
+            data-aos-delay="400"
+          >
+            <div
+              class="archive-row"
+              data-aos="fade-up"
+              data-aos-delay="100"
+              data-preview="assets/project_neon_cybernetics.webp"
+            >
+              <span class="arc-num">#01</span>
+              <span class="arc-name">NEON CYBERNETICS</span>
+              <span class="arc-cat">Brand Identity System</span>
+              <span class="arc-year">2025</span>
+              <span class="arc-medium">Vector Polyhedron &amp; WebGL</span>
+              <a class="btn btn-glass btn-sm" href="404.html">VIEW</a>
+            </div>
+            <div
+              class="archive-row"
+              data-aos="fade-up"
+              data-aos-delay="200"
+              data-preview="assets/project_synthesis_editorial.webp"
+            >
+              <span class="arc-num">#02</span>
+              <span class="arc-name">SYNTHESIS EDITORIAL</span>
+              <span class="arc-cat">Publication &amp; Poster</span>
+              <span class="arc-year">2025</span>
+              <span class="arc-medium">350GSM Stock &amp; Kinetic Type</span>
+              <a class="btn btn-glass btn-sm" href="404.html">VIEW</a>
+            </div>
+            <div
+              class="archive-row"
+              data-aos="fade-up"
+              data-aos-delay="300"
+              data-preview="assets/project_kinetic_packaging.webp"
+            >
+              <span class="arc-num">#03</span>
+              <span class="arc-name">KINETIC PACKAGING</span>
+              <span class="arc-cat">Luxury Packaging</span>
+              <span class="arc-year">2024</span>
+              <span class="arc-medium">Foil Stamped Dieline CAD</span>
+              <a class="btn btn-glass btn-sm" href="404.html">VIEW</a>
+            </div>
+            <div
+              class="archive-row"
+              data-aos="fade-up"
+              data-aos-delay="400"
+              data-preview="assets/project_nebula_ui.webp"
+            >
+              <span class="arc-num">#04</span>
+              <span class="arc-name">NEBULA UI SYSTEM</span>
+              <span class="arc-cat">UI / Digital Screen</span>
+              <span class="arc-year">2024</span>
+              <span class="arc-medium">Dark Mode Component Grid</span>
+              <a class="btn btn-glass btn-sm" href="404.html">VIEW</a>
+            </div>
+            <div
+              class="archive-row"
+              data-aos="fade-up"
+              data-aos-delay="100"
+              data-preview="assets/project_metaverse_art.webp"
+            >
+              <span class="arc-num">#05</span>
+              <span class="arc-name">METAVERSE EXHIBITION</span>
+              <span class="arc-cat">3D &amp; Art Direction</span>
+              <span class="arc-year">2026</span>
+              <span class="arc-medium">Spatial Vector Staging</span>
+              <a class="btn btn-glass btn-sm" href="404.html">VIEW</a>
+          </div>
+        </div>
+      </section>
+      <!-- 10. EXPERIMENTAL WORK ("BEYOND THE BRIEF") -->
+      <section
+        class="snap-section experimental-section"
+        data-aos="fade-up"
+        id="experimental-work"
+      >
+        <div class="section-container">
+          <div class="section-header">
+            <span class="section-num">LABORATORY</span>
+            <h2 class="section-title">BEYOND THE BRIEF</h2>
+            <p class="section-subtitle">
+              Personal typography experiments, abstract posters, 3D renders,
+              generative visuals, and creative coding explorations.
+            </p>
+          </div>
+          <div class="experimental-grid">
+            <div
+              class="exp-card glass-panel"
+              data-aos="fade-up"
+              data-aos-delay="100"
+              data-cursor="hover"
+            >
+              <div class="exp-img-wrap" data-aos="zoom-in" data-aos-delay="150">
+                <img
+                  alt="Variable Glyph Axis #09 Font Exploration"
+                  class="exp-img"
+                  src="assets/exp-variable-glyph.webp"
+                />
+                <span class="exp-tag">GENERATIVE TYPOGRAPHY</span>
+              </div>
+              <div class="exp-info">
+                <h3>VARIABLE GLYPH AXIS #09</h3>
+                <p>
+                  Real-time variable font width interpolation reacting to audio
+                  frequencies.
+                </p>
+              </div>
+            </div>
+            <div
+              class="exp-card glass-panel"
+              data-aos="fade-up"
+              data-aos-delay="200"
+              data-cursor="hover"
+            >
+              <div class="exp-img-wrap" data-aos="zoom-in" data-aos-delay="150">
+                <img
+                  alt="Spatial Polyhedron 3D Vector Form Render"
+                  class="exp-img"
+                  src="assets/exp-spatial-polyhedron.webp"
+                />
+                <span class="exp-tag">3D VECTOR FORM</span>
+              </div>
+              <div class="exp-info">
+                <h3>SPATIAL POLYHEDRON STAGING</h3>
+                <p>
+                  Depth-mapped 3D geometry exploration rendered in high-contrast
+                  violet OLED tokens.
+                </p>
+              </div>
+            </div>
+            <div
+              class="exp-card glass-panel"
+              data-aos="fade-up"
+              data-aos-delay="300"
+              data-cursor="hover"
+            >
+              <div class="exp-img-wrap" data-aos="zoom-in" data-aos-delay="150">
+                <img
+                  alt="Neon Brutalist Risograph Zine Cover"
+                  class="exp-img"
+                  src="assets/exp-brutalist-zine.webp"
+                />
+                <span class="exp-tag">ABSTRACT POSTER</span>
+              </div>
+              <div class="exp-info">
+                <h3>NEON BRUTALIST ZINE</h3>
+                <p>
+                  Limited-run experimental risograph print layout exploring
+                  negative space margins.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- ONGOING PROJECTS SECTION -->
+      <section
+        class="snap-section ongoing-projects-section"
+        data-aos="fade-up"
+        id="ongoing-projects"
+      >
+        <div class="section-container">
+          <div class="section-header">
+            <span class="section-num"> ACTIVE IN STUDIO</span>
+            <h2 class="section-title">ONGOING COMMISSIONS</h2>
+            <p class="section-subtitle">
+              Real-time peek into projects currently undergoing design
+              production in the lab.
+            </p>
+          </div>
+          <div class="ongoing-grid">
+            <div
+              class="ongoing-card glass-panel"
+              data-aos="fade-up"
+              data-aos-delay="400"
+              data-cursor="hover"
+            >
+              <span class="ongoing-badge"
+                ><i class="fa-solid fa-spinner fa-spin"></i> IN PRODUCTION</span
+              >
+              <h3>HYPERION AUTONOMOUS VEHICLE UI</h3>
+              <p class="ongoing-client">CLIENT: HYPERION DYNAMICS, BERLIN</p>
+              <p
+                style="
+                  font-size: 0.85rem;
+                  color: var(--text-secondary);
+                  line-height: 1.5;
+                "
+              >
+                Dark-mode cockpit HUD vector interface system and real-time
+                telemetry graphics.
+              </p>
+              <div class="ongoing-progress-wrap">
+                <div class="ongoing-progress-head">
+                  <span>COMPLETION</span>
+                  <span>80%</span>
+                </div>
+                <div class="ongoing-bar">
+                  <div class="ongoing-fill" style="width: 80%"></div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="ongoing-card glass-panel"
+              data-aos="fade-up"
+              data-aos-delay="100"
+              data-cursor="hover"
+            >
+              <span class="ongoing-badge"
+                ><i class="fa-solid fa-compass-drafting"></i> WIREFRAMING</span
+              >
+              <h3>CYBERDYNE QUANTUM OS BRANDING</h3>
+              <p class="ongoing-client">CLIENT: CYBERDYNE SYSTEMS, TOKYO</p>
+              <p
+                style="
+                  font-size: 0.85rem;
+                  color: var(--text-secondary);
+                  line-height: 1.5;
+                "
+              >
+                Spatial logo matrix, quantum font variable axes, and interactive
+                brand guidelines.
+              </p>
+              <div class="ongoing-progress-wrap">
+                <div class="ongoing-progress-head">
+                  <span>COMPLETION</span>
+                  <span>45%</span>
+                </div>
+                <div class="ongoing-bar">
+                  <div class="ongoing-fill" style="width: 45%"></div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="ongoing-card glass-panel"
+              data-aos="fade-up"
+              data-aos-delay="200"
+              data-cursor="hover"
+            >
+              <span class="ongoing-badge"
+                ><i class="fa-solid fa-print"></i> PROOFING</span
+              >
+              <h3>TOKYO CYBER-FASHION MONOGRAPH</h3>
+              <p class="ongoing-client">CLIENT: KINETIC PRESS, LONDON</p>
+              <p
+                style="
+                  font-size: 0.85rem;
+                  color: var(--text-secondary);
+                  line-height: 1.5;
+                "
+              >
+                280-page hardcover publication print proofing, foil stamping,
+                and matte velvet stock test.
+              </p>
+              <div class="ongoing-progress-wrap">
+                <div class="ongoing-progress-head">
+                  <span>COMPLETION</span>
+                  <span>90%</span>
+                </div>
+                <div class="ongoing-bar">
+                  <div class="ongoing-fill" style="width: 90%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- 12. TESTIMONIAL / PROJECT IMPACT SLIDER -->
+      <section
+        class="snap-section impact-section"
+        data-aos="fade-up"
+        id="project-impact"
+      >
+        <div class="section-container">
+          <div class="section-header text-center">
+            <span class="section-num">VERIFIED RESULTS</span>
+            <h2 class="section-title">CLIENT IMPACT &amp; OUTCOMES</h2>
+            <p class="section-subtitle">
+              Connecting visual identity architecture with real-world business
+              results.
+            </p>
+          </div>
+          <div class="testimonial-slider-wrapper">
+            <div class="testimonial-slider-track" id="testimonial-slider-track">
+              <!-- Slide 1 -->
+              <div
+                class="testimonial-slide active"
+                data-aos="fade-up"
+                data-aos-delay="100"
+              >
+                <div
+                  class="impact-quote-card glass-panel"
+                  data-aos="fade-up"
+                  data-aos-delay="300"
+                >
+                  <i class="fa-solid fa-quote-left quote-ico"></i>
+                  <blockquote class="impact-quote">
+                    "Stackly transformed our brand from a generic tech company into
+                    a visual powerhouse in Tokyo. Our series A funding pitch
+                    deck won instant acclaim."
+                  </blockquote>
+                  <div class="impact-author">
+                    <strong>KENJI SATO</strong>
+                    <span>FOUNDER, NEON CYBERNETICS TOKYO</span>
+                  </div>
+                  <div class="impact-stat-badge">
+                    <i class="fa-solid fa-chart-line"></i> +340% BRAND
+                    ENGAGEMENT SURGE
+                  </div>
+                </div>
+              </div>
+              <!-- Slide 2 -->
+              <div
+                class="testimonial-slide"
+                data-aos="fade-up"
+                data-aos-delay="200"
+              >
+                <div
+                  class="impact-quote-card glass-panel"
+                  data-aos="fade-up"
+                  data-aos-delay="400"
+                >
+                  <i class="fa-solid fa-quote-left quote-ico"></i>
+                  <blockquote class="impact-quote">
+                    "The print monograph and foil stamped packaging dielines
+                    were executed with mathematical precision. An absolute
+                    masterclass in editorial design."
+                  </blockquote>
+                  <div class="impact-author">
+                    <strong>ELENA ROSTOVA</strong>
+                    <span>CREATIVE DIRECTOR, SYNTHESIS MAGAZINE LONDON</span>
+                  </div>
+                  <div class="impact-stat-badge">
+                    <i class="fa-solid fa-trophy"></i> 100% SOLD OUT INITIAL
+                    EDITION
+                  </div>
+                </div>
+              </div>
+              <!-- Slide 3 -->
+              <div
+                class="testimonial-slide"
+                data-aos="fade-up"
+                data-aos-delay="300"
+              >
+                <div
+                  class="impact-quote-card glass-panel"
+                  data-aos="fade-up"
+                  data-aos-delay="100"
+                >
+                  <i class="fa-solid fa-quote-left quote-ico"></i>
+                  <blockquote class="impact-quote">
+                    "The dark mode high-density component system delivered for
+                    Nebula UI revolutionized our software interface. Sleek,
+                    performant, and unforgettable."
+                  </blockquote>
+                  <div class="impact-author">
+                    <strong>MARCUS THORNE</strong>
+                    <span>CTO, NEBULA SYSTEMS NYC</span>
+                  </div>
+                  <div class="impact-stat-badge">
+                    <i class="fa-solid fa-bolt"></i> +220% USER RETENTION
+                    INCREASE
+                  </div>
+                </div>
+              </div>
+              <!-- Slide 4 -->
+              <div
+                class="testimonial-slide"
+                data-aos="fade-up"
+                data-aos-delay="400"
+              >
+                <div
+                  class="impact-quote-card glass-panel"
+                  data-aos="fade-up"
+                  data-aos-delay="200"
+                >
+                  <i class="fa-solid fa-quote-left quote-ico"></i>
+                  <blockquote class="impact-quote">
+                    "Working with Stackly brought our spatial 3D exhibition
+                    staging to life across 14 European galleries. A true visual
+                    architect."
+                  </blockquote>
+                  <div class="impact-author">
+                    <strong>DR. SOPHIA BENNETT</strong>
+                    <span>HEAD OF CURATION, BERLIN ART STAGING</span>
+                  </div>
+                  <div class="impact-stat-badge">
+                    <i class="fa-solid fa-award"></i> INTERNATIONAL DESIGN AWARD
+                    2026
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Manual Controls & Dots -->
+            <div class="testimonial-slider-controls">
+              <button
+                aria-label="Previous Testimonial"
+                class="slider-btn prev-btn"
+                id="testimonial-prev-btn"
+              >
+                <i class="fa-solid fa-chevron-left"></i>
+              </button>
+              <div class="slider-dots" id="testimonial-dots">
+                <span class="dot active" data-slide="0"></span>
+                <span class="dot" data-slide="1"></span>
+                <span class="dot" data-slide="2"></span>
+                <span class="dot" data-slide="3"></span>
+              </div>
+              <button
+                aria-label="Next Testimonial"
+                class="slider-btn next-btn"
+                id="testimonial-next-btn"
+              >
+                </button>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- PROJECTS CTA BANNER SECTION -->
+      <section
+        class="snap-section blog-cta-section"
+        data-aos="fade-up"
+        id="projects-cta"
+      >
+        <div class="section-container">
+          <div class="blog-cta-wrap">
+            <h2 class="cta-title kinetic-title">
+              <span>HAVE A COMMISSION</span><br />
+              <span class="violet-highlight">IN MIND?</span>
+            </h2>
+            <p class="cta-desc">
+              Translating complex technical and strategic business objectives
+              into award-winning visual architecture.
+            </p>
+            <div class="cta-actions">
+              <a
+                class="btn btn-primary btn-xl magnetic-btn"
+                href="contact.html"
+              >
+                <span>INQUIRE FOR AVAILABILITY</span>
+                <i class="fa-solid fa-arrow-right"></i>
+              </a>
+              <a
+                class="btn btn-glass btn-xl magnetic-btn"
+                href="404.html"
+              >
+                <span>VIEW FULL ARCHIVE</span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <!-- 4-COLUMN SITE FOOTER -->
+        <footer class="footer site-footer">
+          <div class="footer-container section-container">
+            <div class="footer-4col-grid">
+              <!-- Col 1: Logo, Short Description & Socials -->
+              <div class="footer-col footer-col-brand">
+                <a class="footer-logo" href="index.html">
+                  <img
+                    alt="STACKLY"
+                    class="brand-logo-img"
+                    src="assets/logo.webp"
+                  />
+                </a>
+                <p class="footer-brand-desc">
+                  Crafting high-contrast brand identity systems, publication
+                  layouts, and future-forward design perspectives for visionary
+                  clients worldwide.
+                </p>
+                <div class="footer-social-links">
+                  <a
+                    aria-label="Behance"
+                    class="footer-social-icon"
+                    href="404.html"
+                    ><i class="fa-brands fa-behance"></i
+                  ></a>
+                  <a
+                    aria-label="Dribbble"
+                    class="footer-social-icon"
+                    href="404.html"
+                    ><i class="fa-brands fa-dribbble"></i
+                  ></a>
+                  <a
+                    aria-label="Instagram"
+                    class="footer-social-icon"
+                    href="404.html"
+                    ><i class="fa-brands fa-instagram"></i
+                  ></a>
+                  <a
+                    aria-label="LinkedIn"
+                    class="footer-social-icon"
+                    href="404.html"
+                    ><i class="fa-brands fa-linkedin"></i
+                  ></a>
+                </div>
+              </div>
+              <!-- Col 2: Quick Links -->
+              <div class="footer-col">
+                <h4 class="footer-col-title">QUICK LINKS</h4>
+                <ul class="footer-nav-links">
+                  <li>
+                    <a href="index.html"
+                      >Home</a
+                    >
+                  </li>
+                  <li>
+                    <a href="projects.html"
+                      >Projects</a
+                    >
+                  </li>
+                  <li>
+                    <a href="about.html"
+                      >About</a
+                    >
+                  </li>
+                  <li>
+                    <a href="services.html"
+                      >Services</a
+                    >
+                  </li>
+                  <li>
+                    <a href="blog.html"
+                      >Blog</a
+                    >
+                  </li>
+                  <li>
+                    <a href="contact.html"
+                      >Contact</a
+                    >
+                  </li>
+                </ul>
+              </div>
+              <!-- Col 3: Policies -->
+              <div class="footer-col">
+                <h4 class="footer-col-title">POLICIES &amp; LEGAL</h4>
+                <ul class="footer-nav-links">
+                  <li>
+                    <a href="404.html"
+                      >Privacy Policy</a
+                    >
+                  </li>
+                  <li>
+                    <a href="404.html"
+                      >Terms of
+                      Service</a
+                    >
+                  </li>
+                  <li>
+                    <a href="404.html"
+                      >Revision &amp;
+                      Refund Policy</a
+                    >
+                  </li>
+                  <li>
+                    <a href="404.html"
+                      >Copyright &amp;
+                      Asset Licensing</a
+                    >
+                  </li>
+                  <li>
+                    <a href="404.html"
+                      >Client
+                      Confidentiality NDA</a
+                    >
+                  </li>
+                </ul>
+              </div>
+              <!-- Col 4: Contact Details -->
+              <div class="footer-col">
+                <h4 class="footer-col-title">CONTACT DETAILS</h4>
+                <ul class="footer-contact-list">
+                  <li>
+                    <i class="fa-solid fa-envelope contact-ico"></i>
+                    <div>
+                      <span class="contact-lbl">Direct Email</span>
+                      <a class="contact-val" href="mailto:info@stackly.com"
+                        >info@stackly.com</a
+                      >
+                    </div>
+                  </li>
+                  <li>
+                    <i class="fa-solid fa-phone contact-ico"></i>
+                    <div>
+                      <span class="contact-lbl">Phone Number</span>
+                      <a class="contact-val" href="tel:9876543210"
+                        >+91 9876543210</a
+                      >
+                    </div>
+                  </li>
+                  <li>
+                    <i class="fa-solid fa-location-dot contact-ico"></i>
+                    <div>
+                      <span class="contact-lbl">Headquarters</span>
+                      <span class="contact-val"
+                        >MMR Complex, Chinna Thirupathi, near Chinna Muniyappan
+                        Kovil, Salem, Tamil Nadu 636008</span
+                      >
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <!-- Bottom Copyright Bar -->
+            <div class="footer-bottom-bar">
+              <p>© 2026 STACKLY. ALL RIGHTS RESERVED.</p>
+              <p class="footer-tagline">
+                PROJECTS EXHIBITION // 2D EDITORIAL GRAPHIC ARCHITECTURE
+              </p>
+            </div>
+          </div>
+        </footer>
+      </section>
+    </main>
+    <!-- CASE STUDY MODAL DIALOG -->
+    <div aria-hidden="true" class="modal-overlay" id="case-study-modal">
+      <div class="modal-dialog modal-lg">
+        <button class="modal-close" id="close-case-modal">×</button>
+        <div class="modal-body" id="case-study-content">
+          <!-- Content injected dynamically via main.js -->
+        </div>
+      </div>
+    </div>
+    <!-- CLIENT PORTAL LOGIN MODAL -->
+    <div class="modal-overlay" id="login-modal">
+      <div class="modal-card">
+        <button class="modal-close" id="close-login-modal">×</button>
+        <div class="modal-header">
+          <i class="fa-solid fa-user-lock modal-icon"></i>
+          <h3 data-aos="fade-up">CLIENT PORTAL</h3>
+          <p>Enter your access key to enter project dashboard.</p>
+        </div>
+        <form class="modal-form" id="login-form">
+          <div class="form-group" data-aos="fade-up" data-aos-delay="100">
+            <label for="client-email">CLIENT EMAIL</label>
+            <input
+              id="client-email"
+              placeholder="client@agency.com"
+              required=""
+              type="email"
+            />
+          </div>
+          <div class="form-group" data-aos="fade-up" data-aos-delay="200">
+            <label for="client-pass">ACCESS KEY</label>
+            <input
+              id="client-pass"
+              placeholder="••••••••••••"
+              required=""
+              type="password"
+            />
+          </div>
+          <button class="btn btn-primary btn-full" type="submit">
+            ENTER PORTAL
+          </button>
+        </form>
+      </div>
+    </div>
+    <!-- Main JavaScript Engine -->
+    <script src="main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  </body>
+</html>

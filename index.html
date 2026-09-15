@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>STACKLY — 2D Editorial Graphic Designer &amp; Visual Storyteller</title>
+<meta content="Portfolio of Stackly — Premium 2D Editorial Graphic Designer, Visual Storyteller, and Motion Architect. 100vh Fullscreen Design Exhibition." name="description"/>
+<!-- Google Fonts: Space Grotesk (Display) & Inter (Body) -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=Space+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- FontAwesome Icons -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<!-- Main CSS -->
+<link href="styles.css" rel="stylesheet"/>
+<!-- GSAP & ScrollTrigger -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet"/>
+</head>
+<body>
+<!-- PRELOADER -->
+<div aria-hidden="true" class="preloader" id="preloader">
+<div class="preloader-glow"></div>
+<div class="preloader-content">
+<div class="preloader-logo-wrapper">
+<div class="preloader-ring"></div>
+<img alt="STACKLY Logo" class="preloader-logo-img" src="assets/logo.webp"/>
+</div>
+<div class="preloader-title">STACKLY</div>
+<div class="preloader-sub">CREATIVE STUDIO</div>
+<div class="preloader-track">
+<div class="preloader-fill" id="preloader-fill"></div>
+</div>
+<div class="preloader-counter" id="preloader-counter">0%</div>
+</div>
+<script>
+      (function() {
+        document.body.style.overflow = 'hidden';
+        var fill = document.getElementById('preloader-fill');
+        var counter = document.getElementById('preloader-counter');
+        var preloader = document.getElementById('preloader');
+        var start = Date.now();
+        var duration = 2000;
+        var done = false;
+
+        function finish() {
+          if (done) return;
+          done = true;
+          if (fill) fill.style.width = '100%';
+          if (counter) counter.textContent = '100%';
+          setTimeout(function() {
+            if (preloader) preloader.classList.add('preloader-hidden');
+            document.body.style.overflow = '';
+            setTimeout(function() {
+              if (preloader && preloader.parentNode) preloader.style.display = 'none';
+            }, 600);
+          }, 150);
+        }
+
+        function tick() {
+          if (done) return;
+          var elapsed = Date.now() - start;
+          var pct = Math.min(100, Math.floor((elapsed / duration) * 100));
+          if (fill) fill.style.width = pct + '%';
+          if (counter) counter.textContent = pct + '%';
+          if (pct < 100) {
+            requestAnimationFrame(tick);
+          } else {
+            finish();
+          }
+        }
+        requestAnimationFrame(tick);
+        setTimeout(finish, 2200);
+      })();
+    </script>
+</div>
+<!-- Custom Kinetic Interactive Cursor -->
+<div class="custom-cursor" id="custom-cursor"></div>
+<div class="cursor-follower" id="cursor-follower">
+<span class="cursor-label">EXPLORE</span>
+</div>
+<!-- NAVBAR -->
+<header class="navbar" id="navbar">
+<div class="nav-container">
+      <a class="nav-logo magnetic-btn" href="index.html">
+        <img alt="STACKLY" class="brand-logo-img" src="assets/logo.webp"/>
+      </a>
+      <nav class="nav-menu">
+        <ul class="nav-links">
+          <li><a class="nav-link active" data-magnetic="" href="index.html">Home</a></li>
+          <li><a class="nav-link" data-magnetic="" href="projects.html">Projects</a></li>
+          <li><a class="nav-link" data-magnetic="" href="about.html">About</a></li>
+          <li><a class="nav-link" data-magnetic="" href="services.html">Services</a></li>
+          <li><a class="nav-link" data-magnetic="" href="blog.html">Blog</a></li>
+          <li><a class="nav-link" data-magnetic="" href="contact.html">Contact</a></li>
+        </ul>
+        <div class="nav-indicator"></div>
+      </nav>
+      <div class="nav-actions">
+        <a class="btn btn-glass btn-sm magnetic-btn" data-cursor="hover" href="login.html">
+          <i class="fa-solid fa-right-to-bracket"></i> Login
+        </a>
+        <button aria-label="Toggle Mobile Menu" class="hamburger-btn" id="hamburger-toggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+  <!-- MOBILE FULLSCREEN NAVIGATION OVERLAY -->
+  <div class="mobile-nav-overlay" id="mobile-nav">
+    <div class="mobile-nav-content">
+      <div class="mobile-nav-header">
+        <a class="nav-logo" href="index.html">
+          <img src="assets/logo.webp" alt="STACKLY Logo" class="brand-logo-img"/>
+        </a>
+        <button class="close-mobile-btn" id="close-mobile-nav" aria-label="Close Navigation Menu">×</button>
+      </div>
+      <ul class="mobile-nav-links">
+        <li><a class="mobile-link active" href="index.html">Home</a></li>
+      <li><a class="mobile-link" href="projects.html">Projects</a></li>
+      <li><a class="mobile-link" href="about.html">About</a></li>
+      <li><a class="mobile-link" href="services.html">Services</a></li>
+      <li><a class="mobile-link" href="blog.html">Blog</a></li>
+      <li><a class="mobile-link" href="contact.html">Contact</a></li>
+    </ul>
+    <div class="mobile-nav-footer">
+      <a href="login.html" class="mobile-login-btn">
+        Login <i class="fa-solid fa-arrow-right"></i>
+      </a>
+    </div>
+  </div>
+</div>
+<!-- MAIN SCROLL SNAP CONTAINER (EVERY SECTION IS 100VH & 100% WIDTH) -->
+<main class="snap-container" id="main-content">
+<!-- 01 — HERO SECTION (100VH) -->
+<section class="snap-section hero-section" data-aos="fade-up" id="hero">
+<!-- 2D Vector Graphic Background Grid -->
+<div class="hero-2d-backdrop">
+<div class="grid-line line-v1"></div>
+<div class="grid-line line-v2"></div>
+<div class="grid-line line-h1"></div>
+<div class="vector-circle circle-1"></div>
+<div class="vector-circle circle-2"></div>
+</div>
+<div class="hero-content">
+<!-- Integrated Human PNG with transparent overlay parallax -->
+<div class="hero-human-wrapper" id="hero-human-wrapper">
+<div class="human-glow-backdrop"></div>
+<img alt="Creative Director &amp; Visual Artist" class="hero-human-img" id="hero-human-img" loading="eager" src="assets/man3.webp"/>
+<div class="human-depth-card floating-card-1">
+<i class="fa-solid fa-bezier-curve card-icon"></i>
+<span>Editorial Layouts</span>
+</div>
+<div class="human-depth-card floating-card-2">
+<i class="fa-solid fa-font card-icon"></i>
+<span>Kinetic Typography</span>
+</div>
+<div class="human-depth-card floating-card-3">
+<i class="fa-solid fa-palette card-icon"></i>
+<span>Brand Identity</span>
+</div>
+<div class="human-depth-card floating-card-4">
+<i class="fa-solid fa-layer-group card-icon"></i>
+<span>UI &amp; Motion</span>
+</div>
+</div>
+<!-- Left Hero Content Block (Constrained Width) -->
+<div class="hero-left-content">
+<div class="hero-eyebrow reveal-label">
+<span class="pulse-dot"></span>
+<span class="eyebrow-text">CREATIVE DESIGNER • VISUAL STORYTELLER</span>
+</div>
+<div class="hero-typography-container">
+<h1 class="hero-title kinetic-title">
+<span class="title-line reveal-text">I CREATE VISUALS</span>
+<span class="title-line title-accent reveal-text">THAT MAKE BRANDS</span>
+<span class="title-line reveal-text">REMEMBERED.</span>
+</h1>
+</div>
+<!-- Dynamic Typewriter Title Bar -->
+<div class="hero-typing-bar reveal-paragraph">
+<span class="typing-prefix">// ROLE:</span>
+<span class="typing-box">
+<span class="typing-text" id="hero-typing-text">GRAPHIC DESIGNER</span>
+<span class="typing-cursor"></span>
+</span>
+</div>
+<p class="hero-description reveal-paragraph">
+            I create bold visual identities, high-impact digital experiences, strategic branding, and creative designs that elevate brands and captivate audiences.
+          </p>
+<div class="hero-cta-wrapper reveal-ctas">
+<div class="hero-cta-group">
+<a class="btn btn-primary magnetic-btn" data-cursor="hover" href="404.html">
+<span>HIRE ME</span>
+<i class="fa-solid fa-arrow-right"></i>
+</a>
+<a class="btn btn-outline magnetic-btn" data-cursor="hover" href="404.html" id="download-resume-btn">
+<span>DOWNLOAD RESUME</span>
+<i class="fa-solid fa-download"></i>
+</a>
+</div>
+<div class="hero-supporting-text">
+<i class="fa-solid fa-circle-check status-icon"></i>
+<span>Available for freelance &amp; creative collaborations</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 02 — ABOUT SECTION (100VH SPLIT LAYOUT) -->
+<section class="snap-section about-section" data-aos="fade-up" id="about">
+<div class="section-container">
+<div class="about-split-wrapper">
+<!-- Left Side: Describe About Me -->
+<div class="about-left-col">
+<div class="section-header">
+<span class="section-num">ABOUT ME</span>
+<h2 class="section-title">CREATIVE ARCHITECTURE &amp; DISRUPTIVE DESIGN</h2>
+</div>
+<p class="about-bio-text">
+              I am <strong>Stackly</strong>, a multidisciplinary graphic designer and visual storyteller specializing in high-contrast editorial layouts, kinetic typography systems, and futuristic brand identities.
+            </p>
+<p class="about-philosophy-text">
+              Design is not merely visual ornament; it is structural spatial architecture. I construct visual worlds where typography breaks rigid grids, editorial composition challenges norms, and brand identity becomes an unforgettable sensory statement.
+            </p>
+<!-- Personal Statement Quote -->
+<div class="about-quote-box">
+<i class="fa-solid fa-quote-left quote-icon"></i>
+<blockquote class="about-quote">
+                "If a design doesn't make the audience stop and feel like they just stepped into 2035, it's already obsolete."
+              </blockquote>
+<span class="about-quote-author"> STACKLY</span>
+</div>
+<!-- Specialties Chips -->
+<div class="about-specialties-block">
+<div class="specialties-tags">
+<span class="spec-tag"><i class="fa-solid fa-square-poll-vertical"></i> Brand Systems</span>
+<span class="spec-tag"><i class="fa-solid fa-font"></i> Kinetic Typography</span>
+<span class="spec-tag"><i class="fa-solid fa-compass-drafting"></i> Packaging Dielines</span>
+<span class="spec-tag"><i class="fa-solid fa-book-open"></i> Editorial Publications</span>
+<span class="spec-tag"><i class="fa-solid fa-wand-magic-sparkles"></i> Motion Art Direction</span>
+<span class="spec-tag"><i class="fa-solid fa-layer-group"></i> Interface Design</span>
+</div>
+</div>
+</div>
+<!-- Right Side: Suitable Image Presentation -->
+<div class="about-right-col">
+<div class="about-image-wrapper">
+<div class="about-image-backdrop"></div>
+<div class="about-image-frame" data-aos="zoom-in" data-aos-delay="150">
+<img alt="Elena Rostova in modern graphic design studio environment" class="about-profile-img" src="assets/hero-graphic-architect.webp"/>
+</div>
+<!-- Floating Accent Badges -->
+<div class="about-badge badge-top-right">
+<i class="fa-solid fa-award badge-icon"></i>
+<div>
+<strong>15+ Design Awards</strong>
+<span>International Recognition</span>
+</div>
+</div>
+<div class="about-badge badge-bottom-left">
+<i class="fa-solid fa-compass-drafting badge-icon"></i>
+<div>
+<strong>Visual Architect</strong>
+<span>8+ Years Experience</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- STATS COUNTER BANNER SECTION (WITH COUNTING ANIMATION) -->
+<section class="snap-section stats-banner-section" data-aos="fade-up" id="stats-counter-banner">
+<div class="section-container">
+<div class="stats-banner-wrapper glass-panel" data-aos="fade-up" data-aos-delay="100">
+<div class="stats-banner-header text-center">
+<span class="section-num"><i class="fa-solid fa-chart-line"></i> QUANTITATIVE IMPACT</span>
+<h2 class="section-title">PROVEN PERFORMANCE &amp; CREATIVE METRICS</h2>
+</div>
+<div class="stats-counter-grid">
+<div class="stat-counter-card glass-panel" data-aos="fade-up" data-aos-delay="200" data-cursor="hover">
+<div class="stat-icon-wrap"><i class="fa-solid fa-cube"></i></div>
+<div class="counter-number-wrap">
+<span class="counter-num" data-target="30">0</span><span class="counter-plus">+</span>
+</div>
+<p class="counter-label">COMMISSIONS DELIVERED</p>
+<span class="counter-sub">Across Brand, Print &amp; Motion</span>
+</div>
+<div class="stat-counter-card glass-panel" data-aos="fade-up" data-aos-delay="300" data-cursor="hover">
+<div class="stat-icon-wrap"><i class="fa-solid fa-globe"></i></div>
+<div class="counter-number-wrap">
+<span class="counter-num" data-target="15">0</span><span class="counter-plus">+</span>
+</div>
+<p class="counter-label">GLOBAL BRANDS</p>
+<span class="counter-sub">Tokyo, London, NYC &amp; Berlin</span>
+</div>
+<div class="stat-counter-card glass-panel" data-aos="fade-up" data-aos-delay="400" data-cursor="hover">
+<div class="stat-icon-wrap"><i class="fa-solid fa-award"></i></div>
+<div class="counter-number-wrap">
+<span class="counter-num" data-target="8">0</span><span class="counter-plus">+</span>
+</div>
+<p class="counter-label">YEARS CREATING</p>
+<span class="counter-sub">Continuous Design Mastery</span>
+</div>
+<div class="stat-counter-card glass-panel" data-aos="fade-up" data-aos-delay="100" data-cursor="hover">
+<div class="stat-icon-wrap"><i class="fa-solid fa-heart-pulse"></i></div>
+<div class="counter-number-wrap">
+<span class="counter-num" data-target="100">0</span><span class="counter-plus">%</span>
+</div>
+<p class="counter-label">CLIENT DEDICATION</p>
+<span class="counter-sub">100% On-Time Handoff Rate</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 03 — PROJECTS (100VH SLIDER) -->
+<section class="snap-section projects-section" data-aos="fade-up" id="projects">
+<div class="section-container">
+<div class="projects-sticky-header">
+<div>
+<span class="section-num">PORTFOLIO EXHIBITION</span>
+<h2 class="section-title">FEATURED PROJECTS</h2>
+</div>
+<div class="projects-nav-btns">
+<button aria-label="Previous Project" class="proj-nav-btn" id="proj-prev"><i class="fa-solid fa-arrow-left"></i></button>
+<button aria-label="Next Project" class="proj-nav-btn" id="proj-next"><i class="fa-solid fa-arrow-right"></i></button>
+</div>
+</div>
+<div class="projects-slider-wrapper">
+<div class="projects-slider" id="projects-slider">
+<!-- Project 1 -->
+<article class="project-slide active" data-aos="fade-up" data-aos-delay="100" data-project-id="1">
+<div class="project-image-wrap" data-aos="zoom-in" data-aos-delay="150">
+<img alt="Neon Cybernetics branding system and quantum tech logo matrix" class="project-img" src="assets/project-neon-cybernetics.webp"/>
+<div class="project-overlay"></div>
+<span class="project-num">01</span>
+</div>
+<div class="project-meta">
+<div class="project-meta-top">
+<span class="project-category">BRAND IDENTITY / VECTOR SYSTEM</span>
+<span class="project-year">2025</span>
+</div>
+<h3 class="project-title">NEON CYBERNETICS</h3>
+<p class="project-desc">A futuristic visual language and identity system for a quantum computing infrastructure startup in Tokyo.</p>
+            <a href="404.html" class="btn-text">
+              <span>View Case Study</span> <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </div>
+        </article>
+        <!-- Project 2 -->
+        <article class="project-slide" data-aos="fade-up" data-aos-delay="200" data-project-id="2">
+          <div class="project-image-wrap" data-aos="zoom-in" data-aos-delay="150">
+            <img alt="Synthesis Editorial high-fashion publication and kinetic typography spread" class="project-img" src="assets/project-synthesis-editorial.webp"/>
+            <div class="project-overlay"></div>
+            <span class="project-num">02</span>
+          </div>
+          <div class="project-meta">
+            <div class="project-meta-top">
+              <span class="project-category">EDITORIAL / KINETIC TYPE</span>
+              <span class="project-year">2025</span>
+            </div>
+            <h3 class="project-title">SYNTHESIS EDITORIAL</h3>
+            <p class="project-desc">High-fashion printed magazine layout paired with kinetic typography display typefaces.</p>
+            <a href="404.html" class="btn-text">
+              <span>View Case Study</span> <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </div>
+        </article>
+        <!-- Project 3 -->
+        <article class="project-slide" data-aos="fade-up" data-aos-delay="300" data-project-id="3">
+          <div class="project-image-wrap" data-aos="zoom-in" data-aos-delay="150">
+            <img alt="Kinetic Packaging luxury matte black box dielines with foil stamping" class="project-img" src="assets/project-kinetic-packaging.webp"/>
+            <div class="project-overlay"></div>
+            <span class="project-num">03</span>
+          </div>
+          <div class="project-meta">
+            <div class="project-meta-top">
+              <span class="project-category">PACKAGING / DIELINE ARCHITECTURE</span>
+              <span class="project-year">2024</span>
+            </div>
+            <h3 class="project-title">KINETIC PACKAGING</h3>
+            <p class="project-desc">Tactile matte black and violet foil box packaging design for luxury cyber-wear accessories.</p>
+            <a href="404.html" class="btn-text">
+              <span>View Case Study</span> <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </div>
+        </article>
+        <!-- Project 4 -->
+        <article class="project-slide" data-aos="fade-up" data-aos-delay="400" data-project-id="4">
+          <div class="project-image-wrap" data-aos="zoom-in" data-aos-delay="150">
+            <img alt="Nebula UI dark mode SaaS component dashboard" class="project-img" src="assets/project-nebula-ui.webp"/>
+            <div class="project-overlay"></div>
+            <span class="project-num">04</span>
+          </div>
+          <div class="project-meta">
+            <div class="project-meta-top">
+              <span class="project-category">DIGITAL SCREEN / UI ARCHITECTURE</span>
+              <span class="project-year">2024</span>
+            </div>
+            <h3 class="project-title">NEBULA DIGITAL SYSTEM</h3>
+            <p class="project-desc">Dynamic generative dashboard layout system with dark mode high-contrast component design.</p>
+            <a href="404.html" class="btn-text">
+              <span>View Case Study</span> <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </div>
+        </article>
+        <!-- Project 5 -->
+        <article class="project-slide" data-aos="fade-up" data-aos-delay="100" data-project-id="5">
+          <div class="project-image-wrap" data-aos="zoom-in" data-aos-delay="150">
+            <img alt="Metaverse Art Direction spatial exhibition staging" class="project-img" src="assets/project-metaverse-art.webp"/>
+            <div class="project-overlay"></div>
+            <span class="project-num">05</span>
+          </div>
+          <div class="project-meta">
+            <div class="project-meta-top">
+              <span class="project-category">ART DIRECTION / EXHIBITION</span>
+              <span class="project-year">2026</span>
+            </div>
+            <h3 class="project-title">METAVERSE ART DIRECTION</h3>
+            <p class="project-desc">Full 2D &amp; spatial graphic exhibition designed for digital art collectors worldwide.</p>
+            <a href="404.html" class="btn-text">
+              <span>View Case Study</span> <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+</div>
+</article>
+</div>
+</div>
+</div>
+</section>
+<!-- 05 — SERVICES (100VH KINETIC TYPOGRAPHY WALL) -->
+<section class="snap-section services-section" data-aos="fade-up" id="services">
+<div class="section-container">
+<div class="section-header">
+<span class="section-num">CAPABILITIES</span>
+<h2 class="section-title">SERVICES WALL</h2>
+</div>
+<div class="kinetic-wall">
+<!-- Service Item 1 -->
+<div class="service-item" data-aos="fade-up" data-aos-delay="100" data-bg="assets/project_neon_cybernetics.webp">
+<div class="service-header">
+<span class="service-num">01</span>
+<h3 class="service-title">BRANDING</h3>
+<i class="fa-solid fa-arrow-right service-arrow"></i>
+</div>
+<div class="service-expand-content">
+<p class="service-desc">Complete visual identities, geometric logo systems, brand guidelines, and spatial brand architecture.</p>
+<div class="service-tags">
+<span>Visual Identity</span> <span>Logo Matrix</span> <span>Brand Guidelines</span>
+</div>
+</div>
+</div>
+<!-- Service Item 2 -->
+<div class="service-item" data-aos="fade-up" data-aos-delay="200" data-bg="assets/project_synthesis_editorial.webp">
+<div class="service-header">
+<span class="service-num">02</span>
+<h3 class="service-title">EDITORIAL</h3>
+<i class="fa-solid fa-arrow-right service-arrow"></i>
+</div>
+<div class="service-expand-content">
+<p class="service-desc">High-end publication layouts, typography books, experimental zines, and print-to-digital layout systems.</p>
+<div class="service-tags">
+<span>Publication</span> <span>Typography</span> <span>Grid Architecture</span>
+</div>
+</div>
+</div>
+<!-- Service Item 3 -->
+<div class="service-item" data-aos="fade-up" data-aos-delay="300" data-bg="assets/project_metaverse_art.webp">
+<div class="service-header">
+<span class="service-num">03</span>
+<h3 class="service-title">MOTION DESIGN</h3>
+<i class="fa-solid fa-arrow-right service-arrow"></i>
+</div>
+<div class="service-expand-content">
+<p class="service-desc">Cinematic 2D animation, kinetic title sequences, broadcast graphics, and promotional teaser visualizers.</p>
+<div class="service-tags">
+<span>2D Animation</span> <span>Title Design</span> <span>Teaser Films</span>
+</div>
+</div>
+</div>
+<!-- Service Item 4 -->
+<div class="service-item" data-aos="fade-up" data-aos-delay="400" data-bg="assets/project_nebula_ui.webp">
+<div class="service-header">
+<span class="service-num">04</span>
+<h3 class="service-title">DIGITAL DESIGN</h3>
+<i class="fa-solid fa-arrow-right service-arrow"></i>
+</div>
+<div class="service-expand-content">
+<p class="service-desc">Interactive UI/UX design systems, dark-mode websites, graphic interfaces, and digital design guides.</p>
+<div class="service-tags">
+<span>UI Systems</span> <span>Interface Design</span> <span>Grid Systems</span>
+</div>
+</div>
+</div>
+<!-- Service Item 5 -->
+<div class="service-item" data-aos="fade-up" data-aos-delay="100" data-bg="assets/project_kinetic_packaging.webp">
+<div class="service-header">
+<span class="service-num">05</span>
+<h3 class="service-title">PACKAGING</h3>
+<i class="fa-solid fa-arrow-right service-arrow"></i>
+</div>
+<div class="service-expand-content">
+<p class="service-desc">Luxury product packaging, structural dielines, matte texture finishes, and custom box unboxing journeys.</p>
+<div class="service-tags">
+<span>Structural Dielines</span> <span>Foil Finishing</span> <span>Unboxing UX</span>
+</div>
+</div>
+</div>
+<!-- Service Item 6 -->
+<div class="service-item" data-aos="fade-up" data-aos-delay="200" data-bg="assets/project_metaverse_art.webp">
+<div class="service-header">
+<span class="service-num">06</span>
+<h3 class="service-title">ART DIRECTION</h3>
+<i class="fa-solid fa-arrow-right service-arrow"></i>
+</div>
+<div class="service-expand-content">
+<p class="service-desc">Comprehensive visual storytelling, digital campaign direction, photoshoot staging, and aesthetic strategy.</p>
+<div class="service-tags">
+<span>Campaign Direction</span> <span>Visual Strategy</span> <span>Graphic Staging</span>
+</div>
+</div>
+</div>
+</div>
+<div class="service-backdrop-preview" id="service-preview"></div>
+</div>
+</section>
+<!-- 06 — CREATIVE PROCESS (100VH INTERACTIVE 2D CANVASTIMELINE) -->
+<section class="snap-section process-section" data-aos="fade-up" id="process">
+<div class="section-container">
+<div class="section-header">
+<span class="section-num"> METHODOLOGY</span>
+<h2 class="section-title">CHAOS → CONCEPT → DESIGN</h2>
+<p class="section-subtitle">Click through stages to observe raw chaotic ideas morph into pristine 2D vector structure.</p>
+</div>
+<div class="process-interactive-wrap">
+<canvas class="process-canvas" id="process-canvas"></canvas>
+<div class="process-stages-nav">
+<div class="stage-step active" data-aos="fade-up" data-aos-delay="100" data-stage="1">
+<span class="step-num">01</span>
+<span class="step-title">RESEARCH</span>
+<p class="step-desc">Gathering raw chaotic data, moodboards &amp; conceptual fragments.</p>
+</div>
+<div class="stage-step" data-aos="fade-up" data-aos-delay="200" data-stage="2">
+<span class="step-num">02</span>
+<span class="step-title">CONCEPT</span>
+<p class="step-desc">Structuring particles into geometric wireframes and mathematical grids.</p>
+</div>
+<div class="stage-step" data-aos="fade-up" data-aos-delay="300" data-stage="3">
+<span class="step-num">03</span>
+<span class="step-title">DESIGN</span>
+<p class="step-desc">Applying vector surfaces, kinetic typography, and high-contrast forms.</p>
+</div>
+<div class="stage-step" data-aos="fade-up" data-aos-delay="400" data-stage="4">
+<span class="step-num">04</span>
+<span class="step-title">REFINE</span>
+<p class="step-desc">Polishing contrast, vector precision, and violet accents.</p>
+</div>
+<div class="stage-step" data-aos="fade-up" data-aos-delay="100" data-stage="5">
+<span class="step-num">05</span>
+<span class="step-title">DELIVER</span>
+<p class="step-desc">Final pristine interactive graphic design exhibition asset.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 07 — SKILLS & EXPERTISE SECTION -->
+<section class="snap-section skills-section" data-aos="fade-up" id="skills">
+<div class="section-container">
+<div class="section-header text-center">
+<span class="section-num"> PROFICIENCY</span>
+<h2 class="section-title">SKILLS &amp; EXPERTISE</h2>
+<p class="section-subtitle">Technical mastery across graphic architecture, brand identity systems, and creation software.</p>
+</div>
+<div class="skills-main-grid">
+<!-- Column 1: Core Design Disciplines -->
+<div class="skills-col glass-panel" data-aos="fade-up" data-aos-delay="200">
+<h3 class="skills-col-title"><i class="fa-solid fa-layer-group"></i> DESIGN DISCIPLINES</h3>
+<div class="skill-bar-list">
+<div class="skill-item">
+<div class="skill-info">
+<span class="skill-name">Brand Identity Architecture</span>
+<span class="skill-pct">98%</span>
+</div>
+<div class="skill-progress-bar"><div class="skill-fill" style="width: 98%;"></div></div>
+</div>
+<div class="skill-item">
+<div class="skill-info">
+<span class="skill-name">2D Editorial &amp; Publication Design</span>
+<span class="skill-pct">96%</span>
+</div>
+<div class="skill-progress-bar"><div class="skill-fill" style="width: 96%;"></div></div>
+</div>
+<div class="skill-item">
+<div class="skill-info">
+<span class="skill-name">Kinetic Typography Systems</span>
+<span class="skill-pct">95%</span>
+</div>
+<div class="skill-progress-bar"><div class="skill-fill" style="width: 95%;"></div></div>
+</div>
+<div class="skill-item">
+<div class="skill-info">
+<span class="skill-name">Structural Packaging Dielines</span>
+<span class="skill-pct">92%</span>
+</div>
+<div class="skill-progress-bar"><div class="skill-fill" style="width: 92%;"></div></div>
+</div>
+<div class="skill-item">
+<div class="skill-info">
+<span class="skill-name">Digital UI/UX Component Systems</span>
+<span class="skill-pct">94%</span>
+</div>
+<div class="skill-progress-bar"><div class="skill-fill" style="width: 94%;"></div></div>
+</div>
+<div class="skill-item">
+<div class="skill-info">
+<span class="skill-name">3D Motion Graphics &amp; Animation</span>
+<span class="skill-pct">91%</span>
+</div>
+<div class="skill-progress-bar"><div class="skill-fill" style="width: 91%;"></div></div>
+</div>
+</div>
+</div>
+<!-- Column 2: Creative Software Workbench -->
+<div class="skills-col glass-panel" data-aos="fade-up" data-aos-delay="300">
+<h3 class="skills-col-title"><i class="fa-solid fa-laptop-code"></i> SOFTWARE WORKBENCH</h3>
+<div class="skills-chips-grid">
+<div class="skill-card-box">
+<i class="fa-solid fa-bezier-curve s-ico"></i>
+<div class="s-detail">
+<strong>ADOBE ILLUSTRATOR</strong>
+<span>Vector Systems &amp; Logo Matrices</span>
+</div>
+<span class="s-level">MASTER</span>
+</div>
+<div class="skill-card-box">
+<i class="fa-solid fa-image s-ico"></i>
+<div class="s-detail">
+<strong>ADOBE PHOTOSHOP</strong>
+<span>Composition &amp; Retouching</span>
+</div>
+<span class="s-level">EXPERT</span>
+</div>
+<div class="skill-card-box">
+<i class="fa-solid fa-pen-nib s-ico"></i>
+<div class="s-detail">
+<strong>FIGMA</strong>
+<span>UI Systems &amp; Component Grids</span>
+</div>
+<span class="s-level">EXPERT</span>
+</div>
+<div class="skill-card-box">
+<i class="fa-solid fa-film s-ico"></i>
+<div class="s-detail">
+<strong>AFTER EFFECTS</strong>
+<span>Kinetic Motion &amp; Animation</span>
+</div>
+<span class="s-level">ADVANCED</span>
+</div>
+<div class="skill-card-box">
+<i class="fa-solid fa-book-open s-ico"></i>
+<div class="s-detail">
+<strong>ADOBE INDESIGN</strong>
+<span>Editorial Layouts &amp; Print Books</span>
+</div>
+<span class="s-level">EXPERT</span>
+</div>
+<div class="skill-card-box">
+<i class="fa-solid fa-cube s-ico"></i>
+<div class="s-detail">
+<strong>BLENDER &amp; C4D</strong>
+<span>3D Graphic Asset Staging</span>
+</div>
+<span class="s-level">ADVANCED</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 08 — CLIENT EXPERIENCE (100VH TESTIMONIALS) -->
+<section class="snap-section testimonials-section" data-aos="fade-up" id="testimonials">
+<div class="section-container">
+<div class="section-header text-center" data-aos="fade-up">
+<span class="section-num"> ENDORSEMENTS</span>
+<h2 class="section-title">CLIENT EXPERIENCE</h2>
+<p class="section-subtitle">Real feedback from founders, art directors, and brand leaders who commissioned visual systems.</p>
+</div>
+<div class="testimonial-slider-wrapper" data-aos="fade-up" data-aos-delay="100" id="home-testimonial-wrapper">
+<button aria-label="Previous Testimonial" class="slider-arrow-btn prev-btn" id="home-t-prev">
+<i class="fa-solid fa-chevron-left"></i>
+</button>
+<div class="testimonial-slides-container">
+<!-- Slide 1 -->
+<div class="testimonial-slide active">
+<div class="testimonial-card-slider">
+<div class="testimonial-header" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.2rem;">
+<i class="fa-solid fa-quote-left quote-mark" style="font-size:2rem; color:var(--accent-light,#C084FC);"></i>
+<div class="client-rating" style="color:#F59E0B;">
+<i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+</div>
+</div>
+<p class="testimonial-quote" style="font-size:1.1rem; line-height:1.7; color:#E5E7EB; margin-bottom:1.5rem; font-style:italic;">
+            "Stackly transformed our branding into a spatial 2D graphic system that completely blew away our investors. The attention to kinetic typography detail is unmatched."
+          </p>
+<div class="testimonial-footer" style="display:flex; align-items:center; gap:1rem;">
+<img src="assets/avatar-elena-rostova.webp" alt="Elena Lindqvist" class="client-avatar" style="width:48px; height:48px; border-radius:50%; object-fit:cover;">
+<div class="client-details">
+<strong style="color:#FFF; display:block; font-size:1rem;">ELENA LINDQVIST</strong>
+<span style="color:var(--text-secondary); font-size:0.85rem; display:block;">VP OF BRAND, CYBERTECH GLOBAL</span>
+<span class="project-ref" style="color:var(--accent-light); font-size:0.8rem; font-weight:600;">PROJECT // NEON CYBERNETICS</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Slide 2 -->
+<div class="testimonial-slide">
+<div class="testimonial-card-slider">
+<div class="testimonial-header" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.2rem;">
+<i class="fa-solid fa-quote-left quote-mark" style="font-size:2rem; color:var(--accent-light,#C084FC);"></i>
+<div class="client-rating" style="color:#F59E0B;">
+<i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+</div>
+</div>
+<p class="testimonial-quote" style="font-size:1.1rem; line-height:1.7; color:#E5E7EB; margin-bottom:1.5rem; font-style:italic;">
+            "Working with Stackly on Synthesis Editorial was effortless. The display typography design and tactile packaging layout brought our luxury publication to a global level."
+          </p>
+<div class="testimonial-footer" style="display:flex; align-items:center; gap:1rem;">
+<img src="assets/avatar-marcus-thorne.webp" alt="Marcus Thorne" class="client-avatar" style="width:48px; height:48px; border-radius:50%; object-fit:cover;">
+<div class="client-details">
+<strong style="color:#FFF; display:block; font-size:1rem;">MARCUS THORNE</strong>
+<span style="color:var(--text-secondary); font-size:0.85rem; display:block;">EDITOR-IN-CHIEF, NOIR MAGAZINE</span>
+<span class="project-ref" style="color:var(--accent-light); font-size:0.8rem; font-weight:600;">PROJECT // SYNTHESIS EDITORIAL</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Slide 3 -->
+<div class="testimonial-slide">
+<div class="testimonial-card-slider">
+<div class="testimonial-header" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.2rem;">
+<i class="fa-solid fa-quote-left quote-mark" style="font-size:2rem; color:var(--accent-light,#C084FC);"></i>
+<div class="client-rating" style="color:#F59E0B;">
+<i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+</div>
+</div>
+<p class="testimonial-quote" style="font-size:1.1rem; line-height:1.7; color:#E5E7EB; margin-bottom:1.5rem; font-style:italic;">
+            "The Nebula UI dark mode component system delivered by Stackly revolutionized our SaaS dashboard user retention by over 40%. Pure design mastery."
+          </p>
+<div class="testimonial-footer" style="display:flex; align-items:center; gap:1rem;">
+<img src="assets/avatar-sophia-chen.webp" alt="Sophia Chen" class="client-avatar" style="width:48px; height:48px; border-radius:50%; object-fit:cover;">
+<div class="client-details">
+<strong style="color:#FFF; display:block; font-size:1rem;">SOPHIA CHEN</strong>
+<span style="color:var(--text-secondary); font-size:0.85rem; display:block;">PRODUCT LEAD, NEBULA SAAS</span>
+<span class="project-ref" style="color:var(--accent-light); font-size:0.8rem; font-weight:600;">PROJECT // NEBULA UI SYSTEM</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<button aria-label="Next Testimonial" class="slider-arrow-btn next-btn" id="home-t-next">
+</button>
+<div class="slider-dots-nav">
+<span class="slider-dot active" data-index="0"></span>
+<span class="slider-dot" data-index="1"></span>
+<span class="slider-dot" data-index="2"></span>
+</div>
+</div>
+</div>
+</section>
+<!-- 10 — BLOG INSIGHTS SECTION -->
+<section class="snap-section blog-insights-section" data-aos="fade-up" id="blog-insights">
+<div class="section-container">
+<div class="section-header-flex">
+<div>
+<span class="section-num"> PERSPECTIVES</span>
+<h2 class="section-title">BLOG &amp; DESIGN INSIGHTS</h2>
+<p class="section-subtitle">Articles on kinetic typography, brand architecture, and editorial design perspectives.</p>
+</div>
+<a class="btn btn-outline magnetic-btn" data-cursor="hover" href="blog.html">
+<span>VIEW ALL ARTICLES</span> <i class="fa-solid fa-arrow-right"></i>
+</a>
+</div>
+<div class="home-blog-grid">
+<!-- Article 1 -->
+<article class="home-blog-card glass-panel" data-aos="fade-up" data-aos-delay="400" data-cursor="hover">
+<div class="h-blog-img-wrap" data-aos="zoom-in" data-aos-delay="150">
+<img alt="The Future of Kinetic Typography in 2D Editorial Design preview" class="h-blog-img" src="assets/blog-kinetic-typography.webp"/>
+<span class="h-blog-tag">TYPOGRAPHY // BRAND</span>
+</div>
+<div class="h-blog-content">
+<div class="h-blog-meta">
+<span class="h-blog-date"><i class="fa-regular fa-calendar"></i> JAN 14, 2026</span>
+<span class="h-blog-read"><i class="fa-regular fa-clock"></i> 5 MIN READ</span>
+</div>
+<h3 class="h-blog-title">The Future of Kinetic Typography in 2D Editorial Design</h3>
+<p class="h-blog-excerpt">Exploring how variable fonts and kinetic interpolation break rigid print grids to create responsive digital publication layouts.</p>
+<a class="btn-text" href="404.html">
+<span>Read Full Article</span> <i class="fa-solid fa-arrow-right"></i>
+</a>
+</div>
+</article>
+<!-- Article 2 -->
+<article class="home-blog-card glass-panel" data-aos="fade-up" data-aos-delay="100" data-cursor="hover">
+<div class="h-blog-img-wrap" data-aos="zoom-in" data-aos-delay="150">
+<img alt="Engineering Tactile Packaging Dielines for Luxury Brands preview" class="h-blog-img" src="assets/blog-packaging-dielines.webp"/>
+<span class="h-blog-tag">PACKAGING CAD</span>
+</div>
+<div class="h-blog-content">
+<div class="h-blog-meta">
+<span class="h-blog-date"><i class="fa-regular fa-calendar"></i> FEB 02, 2026</span>
+<span class="h-blog-read"><i class="fa-regular fa-clock"></i> 7 MIN READ</span>
+</div>
+<h3 class="h-blog-title">Engineering Tactile Packaging Dielines for Luxury Brands</h3>
+<p class="h-blog-excerpt">A deep dive into matte velvet paper stocks, metallic foil stamping spec sheets, and unboxing UX architecture.</p>
+<a class="btn-text" href="404.html">
+<span>Read Full Article</span> <i class="fa-solid fa-arrow-right"></i>
+</a>
+</div>
+</article>
+<!-- Article 3 -->
+<article class="home-blog-card glass-panel" data-aos="fade-up" data-aos-delay="200" data-cursor="hover">
+<div class="h-blog-img-wrap" data-aos="zoom-in" data-aos-delay="150">
+<img alt="Brutalist Grid Architecture vs Minimalist Surface Design preview" class="h-blog-img" src="assets/blog-brutalist-grid.webp"/>
+<span class="h-blog-tag">BRAND SYSTEMS</span>
+</div>
+<div class="h-blog-content">
+<div class="h-blog-meta">
+<span class="h-blog-date"><i class="fa-regular fa-calendar"></i> MAR 10, 2026</span>
+<span class="h-blog-read"><i class="fa-regular fa-clock"></i> 4 MIN READ</span>
+</div>
+<h3 class="h-blog-title">Brutalist Grid Architecture vs Minimalist Surface Design</h3>
+<p class="h-blog-excerpt">Analyzing high-contrast Swiss typography grids and how mathematical proportions form iconic brand identities.</p>
+<a class="btn-text" href="404.html">
+<span>Read Full Article</span> <i class="fa-solid fa-arrow-right"></i>
+</a>
+</div>
+</article>
+</div>
+</div>
+</section>
+<!-- 11 — FAQ SECTION -->
+<section class="snap-section faq-section" data-aos="fade-up" id="faq">
+<div class="section-container">
+<div class="section-header text-center">
+<span class="section-num"> CLARITY</span>
+<h2 class="section-title">FREQUENTLY ASKED QUESTIONS</h2>
+<p class="section-subtitle">Clear answers regarding design process, timelines, deliverables, and commissioning.</p>
+</div>
+<div class="faq-accordion-wrapper">
+<!-- FAQ Item 1 -->
+<div class="redesigned-faq-card glass-panel active" data-aos="fade-up" data-aos-delay="100">
+<div class="faq-question-head">
+<span class="faq-number">01</span>
+<h4>What specific design services do you specialize in?</h4>
+<div class="faq-toggle-ico"><i class="fa-solid fa-chevron-down"></i></div>
+</div>
+<div class="faq-answer">
+<p>I specialize in brand identity architecture, geometric vector logo matrices, 2D editorial publication design, kinetic typography systems, luxury packaging dieline CAD, and digital UI component grids.</p>
+</div>
+</div>
+<!-- FAQ Item 2 -->
+<div class="redesigned-faq-card glass-panel" data-aos="fade-up" data-aos-delay="200">
+<div class="faq-question-head">
+<span class="faq-number">02</span>
+<h4>What is your typical project timeline?</h4>
+<div class="faq-toggle-ico"><i class="fa-solid fa-chevron-down"></i></div>
+</div>
+<div class="faq-answer">
+<p>Timelines depend on scope. Focused packaging dielines or logo packages take approximately 2–3 weeks, while comprehensive brand identity systems, publication books, and motion campaign directions take 4–6 weeks.</p>
+</div>
+</div>
+<!-- FAQ Item 3 -->
+<div class="redesigned-faq-card glass-panel" data-aos="fade-up" data-aos-delay="300">
+<div class="faq-question-head">
+<span class="faq-number">03</span>
+<h4>How do revisions and feedback iterations work?</h4>
+<div class="faq-toggle-ico"><i class="fa-solid fa-chevron-down"></i></div>
+</div>
+<div class="faq-answer">
+<p>Every commission includes 2 to 3 structured revision rounds. We review interactive PDF proofs, vector wireframe sheets, and high-resolution mockups to refine every kerning detail and color ratio before final file delivery.</p>
+</div>
+</div>
+<!-- FAQ Item 4 -->
+<div class="redesigned-faq-card glass-panel" data-aos="fade-up" data-aos-delay="400">
+<div class="faq-question-head">
+<span class="faq-number">04</span>
+<h4>What deliverables do I receive upon completion?</h4>
+<div class="faq-toggle-ico"><i class="fa-solid fa-chevron-down"></i></div>
+</div>
+<div class="faq-answer">
+<p>You receive complete production asset vaults including editable SVG/EPS vector source files, high-resolution CMYK print dieline PDFs, font usage guidelines, digital WebGL assets, and full copyright ownership handoff.</p>
+</div>
+</div>
+<!-- FAQ Item 5 -->
+<div class="redesigned-faq-card glass-panel" data-aos="fade-up" data-aos-delay="100">
+<div class="faq-question-head">
+<span class="faq-number">05</span>
+<h4>How do we initiate a project together?</h4>
+<div class="faq-toggle-ico"><i class="fa-solid fa-chevron-down"></i></div>
+</div>
+<div class="faq-answer">
+<p>Simply click the "Start a Project" button or email info@stackly.com with your project scope, target timeline, and estimated budget. I will review your requirements and respond within 24 hours with a custom proposal.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- HOME CTA BANNER SECTION -->
+<section class="snap-section blog-cta-section" data-aos="fade-up" id="home-cta">
+<div class="section-container">
+<div class="blog-cta-wrap">
+<h2 class="cta-title kinetic-title">
+<span>READY TO ELEVATE</span><br/>
+<span class="violet-highlight">YOUR BRAND WORLD?</span>
+</h2>
+<p class="cta-desc">Architecting iconic high-contrast visual identity systems that command category authority worldwide.</p>
+<div class="cta-actions">
+<button class="btn btn-primary btn-xl magnetic-btn" data-cursor="hover" id="open-contact-modal">
+<span>COMMISSION A PROJECT</span>
+<i class="fa-solid fa-arrow-right"></i>
+</button>
+<a class="btn btn-glass btn-xl magnetic-btn" href="services.html">
+<span>EXPLORE SERVICES</span>
+</a>
+</div>
+</div>
+</div>
+<!-- 4-COLUMN SITE FOOTER -->
+<footer class="footer site-footer">
+<div class="footer-container section-container">
+<div class="footer-4col-grid">
+<!-- Col 1: Logo, Short Description & Socials -->
+<div class="footer-col footer-col-brand">
+<a class="footer-logo" href="index.html">
+<img alt="STACKLY" class="brand-logo-img" src="assets/logo.webp"/>
+</a>
+<p class="footer-brand-desc">
+                Crafting high-contrast brand identity systems, publication layouts, and future-forward design perspectives for visionary clients worldwide.
+              </p>
+<div class="footer-social-links">
+<a aria-label="Behance" class="footer-social-icon" href="404.html"><i class="fa-brands fa-behance"></i></a>
+<a aria-label="Dribbble" class="footer-social-icon" href="404.html"><i class="fa-brands fa-dribbble"></i></a>
+<a aria-label="Instagram" class="footer-social-icon" href="404.html"><i class="fa-brands fa-instagram"></i></a>
+<a aria-label="LinkedIn" class="footer-social-icon" href="404.html"><i class="fa-brands fa-linkedin"></i></a>
+</div>
+</div>
+<!-- Col 2: Quick Links -->
+<div class="footer-col">
+<h4 class="footer-col-title">QUICK LINKS</h4>
+<ul class="footer-nav-links">
+<li><a href="index.html">Home</a></li>
+<li><a href="projects.html">Projects</a></li>
+<li><a href="about.html">About</a></li>
+<li><a href="services.html">Services</a></li>
+<li><a href="blog.html">Blog</a></li>
+<li><a href="contact.html">Contact</a></li>
+</ul>
+</div>
+<!-- Col 3: Policies -->
+<div class="footer-col">
+<h4 class="footer-col-title">POLICIES &amp; LEGAL</h4>
+<ul class="footer-nav-links">
+<li><a href="404.html">Privacy Policy</a></li>
+<li><a href="404.html">Terms of Service</a></li>
+<li><a href="404.html">Revision &amp; Refund Policy</a></li>
+<li><a href="404.html">Copyright &amp; Asset Licensing</a></li>
+<li><a href="404.html">Client Confidentiality NDA</a></li>
+</ul>
+</div>
+<!-- Col 4: Contact Details -->
+<div class="footer-col">
+<h4 class="footer-col-title">CONTACT DETAILS</h4>
+<ul class="footer-contact-list">
+<li>
+<i class="fa-solid fa-envelope contact-ico"></i>
+<div>
+<span class="contact-lbl">Direct Email</span>
+<a class="contact-val" href="mailto:info@stackly.com">info@stackly.com</a>
+</div>
+</li>
+<li>
+<i class="fa-solid fa-phone contact-ico"></i>
+<div>
+<span class="contact-lbl">Phone Number</span>
+<a class="contact-val" href="tel:9876543210">+91 9876543210</a>
+</div>
+</li>
+<li>
+<i class="fa-solid fa-location-dot contact-ico"></i>
+<div>
+<span class="contact-lbl">Headquarters</span>
+<span class="contact-val">MMR Complex, Chinna Thirupathi, near Chinna Muniyappan Kovil, Salem, Tamil Nadu 636008</span>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<!-- Bottom Copyright Bar -->
+<div class="footer-bottom-bar">
+<p>© 2026 STACKLY. ALL RIGHTS RESERVED.</p>
+<p class="footer-tagline">CRAFTED WITH HIGH-CONTRAST 2D EDITORIAL ARCHITECTURE</p>
+</div>
+</div>
+</footer>
+</section>
+</main>
+<!-- MODAL DIALOG 1: CASE STUDY DETAIL DRAWER -->
+<div aria-hidden="true" class="modal-overlay" id="case-study-modal">
+<div class="modal-dialog modal-lg">
+<button class="modal-close" id="close-case-modal">×</button>
+<div class="modal-body" id="case-study-content">
+<!-- Content injected dynamically via main.js -->
+</div>
+</div>
+</div>
+<!-- MODAL DIALOG 2: START A PROJECT CONTACT FORM -->
+<div aria-hidden="true" class="modal-overlay" id="contact-modal">
+<div class="modal-dialog">
+<button class="modal-close" id="close-contact-modal">×</button>
+<div class="modal-header">
+<span class="section-num">COMMISSION REQUEST</span>
+<h3 data-aos="fade-up">INITIATE A PROJECT</h3>
+<p>Tell me about your visual goals, timeline, and scope.</p>
+</div>
+<form class="contact-form" id="contact-form" onsubmit="event.preventDefault(); alert('Commission request sent successfully! Stackly will reach out within 24 hours.'); document.getElementById('contact-modal').classList.remove('active');">
+<div class="form-group" data-aos="fade-up" data-aos-delay="100">
+<label for="contact-name">YOUR NAME / COMPANY</label>
+<input id="contact-name" placeholder="e.g. Sarah Connor / Cyberdyne Systems" required="" type="text"/>
+</div>
+<div class="form-group" data-aos="fade-up" data-aos-delay="200">
+<label for="contact-email">EMAIL ADDRESS</label>
+<input id="contact-email" placeholder="sarah@cyberdyne.io" required="" type="email"/>
+</div>
+<div class="form-group" data-aos="fade-up" data-aos-delay="300">
+<label for="contact-service">SERVICE REQUIRED</label>
+<select id="contact-service">
+<option value="branding">Brand Identity &amp; System</option>
+<option value="kinetic-type">Editorial &amp; Kinetic Typography</option>
+<option value="digital-design">UI/UX &amp; Digital Interface</option>
+<option value="packaging">Luxury Packaging Dieline</option>
+<option value="art-direction">Full Motion Art Direction</option>
+</select>
+</div>
+<div class="form-group" data-aos="fade-up" data-aos-delay="400">
+<label for="contact-budget">ESTIMATED BUDGET</label>
+<select id="contact-budget">
+<option value="10k-25k">$10,000 — $25,000</option>
+<option value="25k-50k">$25,000 — $50,000</option>
+<option value="50k+">$50,000+</option>
+</select>
+</div>
+<div class="form-group" data-aos="fade-up" data-aos-delay="100">
+<label for="contact-message">PROJECT BRIEF</label>
+<textarea id="contact-message" placeholder="Describe your vision, deadline, and deliverables..." required="" rows="4"></textarea>
+</div>
+<button class="btn btn-primary btn-full magnetic-btn" type="submit">
+<span>SEND INITIATION BRIEF</span>
+<i class="fa-solid fa-paper-plane"></i>
+</button>
+</form>
+</div>
+</div>
+<!-- MODAL DIALOG 3: CLIENT LOGIN PORTAL -->
+<div aria-hidden="true" class="modal-overlay" id="login-modal">
+<div class="modal-dialog modal-sm">
+<button class="modal-close" id="close-login-modal">×</button>
+<div class="modal-header text-center">
+<i class="fa-solid fa-shield-halved login-shield-icon"></i>
+<h3 data-aos="fade-up">CLIENT PORTAL</h3>
+<p>Enter your project passphrase to access design asset deliverables.</p>
+</div>
+<form class="contact-form" id="login-form" onsubmit="event.preventDefault(); alert('Access Granted. Redirecting to encrypted proofing workspace...'); document.getElementById('login-modal').classList.remove('active');">
+<div class="form-group" data-aos="fade-up" data-aos-delay="200">
+<label for="login-id">CLIENT ID</label>
+<input id="login-id" placeholder="e.g. CYBER-2026-X" required="" type="text"/>
+</div>
+<div class="form-group" data-aos="fade-up" data-aos-delay="300">
+<label for="login-pass">SECURE PASSPHRASE</label>
+<input id="login-pass" placeholder="••••••••••••" required="" type="password"/>
+</div>
+<button class="btn btn-primary btn-full magnetic-btn" type="submit">
+<span>AUTHENTICATE</span>
+<i class="fa-solid fa-key"></i>
+</button>
+</form>
+</div>
+</div>
+<!-- Main JavaScript File -->
+<script src="main.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DESIGN JOURNAL &amp; INSIGHTS — STACKLY</title>
+<meta content="Design Journal, Articles, Perspectives, and Creative Experiments by Stackly — Graphic Architect, Editorial Designer &amp; Motion Artist." name="description"/>
+<!-- Google Fonts: Space Grotesk (Display) & Inter (Body) -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=Space+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- FontAwesome Icons -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<!-- Main CSS -->
+<link href="styles.css" rel="stylesheet"/>
+<!-- GSAP & ScrollTrigger -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet"/>
+</head>
+<body>
+<!-- PRELOADER -->
+<div aria-hidden="true" class="preloader" id="preloader">
+<div class="preloader-glow"></div>
+<div class="preloader-content">
+<div class="preloader-logo-wrapper">
+<div class="preloader-ring"></div>
+<img alt="STACKLY Logo" class="preloader-logo-img" src="assets/logo.webp"/>
+</div>
+<div class="preloader-title">STACKLY</div>
+<div class="preloader-sub">CREATIVE STUDIO</div>
+<div class="preloader-track">
+<div class="preloader-fill" id="preloader-fill"></div>
+</div>
+<div class="preloader-counter" id="preloader-counter">0%</div>
+</div>
+<script>
+      (function() {
+        document.body.style.overflow = 'hidden';
+        var fill = document.getElementById('preloader-fill');
+        var counter = document.getElementById('preloader-counter');
+        var preloader = document.getElementById('preloader');
+        var start = Date.now();
+        var duration = 2000;
+        var done = false;
+
+        function finish() {
+          if (done) return;
+          done = true;
+          if (fill) fill.style.width = '100%';
+          if (counter) counter.textContent = '100%';
+          setTimeout(function() {
+            if (preloader) preloader.classList.add('preloader-hidden');
+            document.body.style.overflow = '';
+            setTimeout(function() {
+              if (preloader && preloader.parentNode) preloader.style.display = 'none';
+            }, 600);
+          }, 150);
+        }
+
+        function tick() {
+          if (done) return;
+          var elapsed = Date.now() - start;
+          var pct = Math.min(100, Math.floor((elapsed / duration) * 100));
+          if (fill) fill.style.width = pct + '%';
+          if (counter) counter.textContent = pct + '%';
+          if (pct < 100) {
+            requestAnimationFrame(tick);
+          } else {
+            finish();
+          }
+        }
+        requestAnimationFrame(tick);
+        setTimeout(finish, 2200);
+      })();
+    </script>
+</div>
+<!-- Custom Kinetic Interactive Cursor -->
+<div class="custom-cursor" id="custom-cursor"></div>
+<div class="cursor-follower" id="cursor-follower">
+<span class="cursor-label">READ</span>
+</div>
+<!-- NAVBAR -->
+<header class="navbar" id="navbar">
+<div class="nav-container">
+<a class="nav-logo magnetic-btn" href="index.html">
+<img alt="STACKLY" class="brand-logo-img" src="assets/logo.webp"/>
+</a>
+<nav class="nav-menu">
+<ul class="nav-links">
+<li><a class="nav-link" data-magnetic="" href="index.html">Home</a></li>
+<li><a class="nav-link" data-magnetic="" href="projects.html">Projects</a></li>
+<li><a class="nav-link" data-magnetic="" href="about.html">About</a></li>
+<li><a class="nav-link" data-magnetic="" href="services.html">Services</a></li>
+<li><a class="nav-link active" data-magnetic="" href="blog.html">Blog</a></li>
+<li><a class="nav-link" data-magnetic="" href="contact.html">Contact</a></li>
+</ul>
+<div class="nav-indicator"></div>
+</nav>
+<div class="nav-actions">
+<a class="btn btn-glass btn-sm magnetic-btn" data-cursor="hover" href="login.html">
+<i class="fa-solid fa-right-to-bracket"></i> Login
+        </a>
+<button aria-label="Toggle Mobile Menu" class="hamburger-btn" id="hamburger-toggle">
+<span></span>
+<span></span>
+<span></span>
+</button>
+</div>
+</div>
+</header>
+<!-- MOBILE FULLSCREEN NAVIGATION OVERLAY -->
+<div class="mobile-nav-overlay" id="mobile-nav">
+  <div class="mobile-nav-content">
+    <div class="mobile-nav-header">
+      <a class="nav-logo" href="index.html">
+        <img src="assets/logo.webp" alt="STACKLY Logo" class="brand-logo-img"/>
+      </a>
+      <button class="close-mobile-btn" id="close-mobile-nav" aria-label="Close Navigation Menu">×</button>
+    </div>
+    <ul class="mobile-nav-links">
+      <li><a class="mobile-link" href="index.html">Home</a></li>
+      <li><a class="mobile-link" href="projects.html">Projects</a></li>
+      <li><a class="mobile-link" href="about.html">About</a></li>
+      <li><a class="mobile-link" href="services.html">Services</a></li>
+      <li><a class="mobile-link active" href="blog.html">Blog</a></li>
+      <li><a class="mobile-link" href="contact.html">Contact</a></li>
+    </ul>
+    <div class="mobile-nav-footer">
+      <a href="login.html" class="mobile-login-btn">
+        Login <i class="fa-solid fa-arrow-right"></i>
+      </a>
+    </div>
+  </div>
+</div>
+<main class="blog-main-container">
+<!-- 1. BLOG HERO BANNER SECTION -->
+<section class="snap-section page-hero-banner" data-aos="fade-up" id="blog-hero">
+<div class="hero-2d-backdrop">
+<div class="grid-line line-v1"></div>
+<div class="grid-line line-v2"></div>
+<div class="grid-line line-h1"></div>
+<div class="vector-circle circle-1"></div>
+<div class="vector-circle circle-2"></div>
+</div>
+<div class="section-container">
+<div class="hero-banner-content text-center">
+<h1 class="hero-title kinetic-title reveal-text">
+            DESIGN <span class="violet-highlight">JOURNAL</span>
+</h1>
+<p class="hero-description reveal-paragraph margin-center">
+            Ideas, insights, and creative explorations documenting graphic design architecture, spatial typography, brand systems, and future design trends.
+          </p>
+</div>
+</div>
+</section>
+<!-- 2. FEATURED ARTICLE SECTION -->
+<section class="snap-section featured-article-section" data-aos="fade-up" id="featured">
+<div class="section-container">
+<div class="section-header-compact">
+<span class="section-num">01 // FEATURED INSIGHT</span>
+<h2 class="section-title">EDITORIAL COVER STORY</h2>
+</div>
+<div class="featured-card glass-panel" data-aos="fade-up" data-aos-delay="100" data-cursor="read">
+<div class="featured-media" data-aos="zoom-in" data-aos-delay="150">
+<img alt="The Architecture of Neon Brutalism: 2026 Visual Paradigm Cover" class="featured-img" src="assets/blog-neon-brutalism-architecture.webp"/>
+<div class="featured-overlay"></div>
+<div class="featured-pill"><i class="fa-solid fa-star"></i> COVER ARTICLE</div>
+</div>
+<div class="featured-body">
+<div class="meta-row">
+<span class="category-tag tag-violet">TYPOGRAPHY &amp; BRANDING</span>
+<span class="reading-time"><i class="fa-regular fa-clock"></i> 8 MIN READ</span>
+<span class="post-date"><i class="fa-regular fa-calendar"></i> SEPT 08, 2026</span>
+</div>
+<h2 class="featured-title">THE ARCHITECTURE OF SPATIAL TYPOGRAPHY IN MODERN BRAND WORLDS</h2>
+<p class="featured-excerpt">
+              How dimensional lettering, responsive kinetic scale, and high-contrast composition are redefining how human audiences experience visual identity across physical galleries and high-density digital displays.
+            </p>
+<div class="author-row">
+<img alt="Stackly" class="author-avatar" src="assets/avatar-elena-rostova.webp"/>
+<div class="author-info">
+<span class="author-name">Stackly</span>
+<span class="author-role">Graphic Architect &amp; Lead Designer</span>
+</div>
+<a class="btn btn-primary" href="404.html">
+<span>READ FULL ARTICLE</span>
+<i class="fa-solid fa-arrow-right"></i>
+</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 3 & 4. CATEGORIES & LATEST ARTICLES GRID -->
+<section class="snap-section articles-grid-section" data-aos="fade-up" id="articles">
+<div class="section-container">
+<div class="section-header-wrap">
+<div>
+<span class="section-num">02 // KNOWLEDGE BASE</span>
+<h2 class="section-title">LATEST ESSAYS &amp; PERSPECTIVES</h2>
+</div>
+</div>
+<!-- Asymmetric Editorial Grid -->
+<div class="articles-grid" id="articles-container">
+<!-- Card 1: Branding -->
+<article class="article-card glass-panel" data-aos="fade-up" data-aos-delay="200" data-category="branding" data-id="1">
+<div class="card-image-wrap" data-aos="zoom-in" data-aos-delay="100">
+<img alt="Brand Systems" class="card-img" src="assets/project-neon-cybernetics.webp"/>
+<span class="card-badge">BRANDING</span>
+</div>
+<div class="card-content">
+<div class="card-meta">
+<span><i class="fa-regular fa-calendar"></i> AUG 28, 2026</span>
+<span><i class="fa-regular fa-clock"></i> 6 MIN READ</span>
+</div>
+<h3 class="card-title">Deconstructing Minimal Maximalism: The 2026 Visual Identity Blueprint</h3>
+<p class="card-excerpt">
+                Why modern luxury brands are merging strict geometric grid frameworks with expressive high-density typography to capture global user attention.
+              </p>
+<div class="card-footer">
+<a href="404.html" class="read-link">READ ESSAY </a>
+</div>
+</div>
+</article>
+<!-- Card 2: Typography -->
+<article class="article-card glass-panel" data-aos="fade-up" data-aos-delay="300" data-category="typography" data-id="2">
+<div class="card-image-wrap" data-aos="zoom-in" data-aos-delay="200">
+<img alt="Kinetic Type" class="card-img" src="assets/project-synthesis-editorial.webp"/>
+<span class="card-badge">TYPOGRAPHY</span>
+</div>
+<div class="card-content">
+<div class="card-meta">
+<span><i class="fa-regular fa-calendar"></i> AUG 14, 2026</span>
+<span><i class="fa-regular fa-clock"></i> 5 MIN READ</span>
+</div>
+<h3 class="card-title">Kinetic Variable Fonts: Designing Motion Without Compromising Legibility</h3>
+<p class="card-excerpt">
+                A technical and artistic breakdown of dynamic axis interpolation for real-time editorial web applications and immersive exhibition displays.
+              </p>
+<div class="card-footer">
+<a href="404.html" class="read-link">READ ESSAY </a>
+</div>
+</div>
+</article>
+<!-- Card 3: Graphic Design / Editorial -->
+<article class="article-card glass-panel" data-aos="fade-up" data-aos-delay="400" data-category="graphic" data-id="3">
+<div class="card-image-wrap" data-aos="zoom-in" data-aos-delay="300">
+<img alt="Editorial Print" class="card-img" src="assets/project-cyber-lookbook.webp"/>
+<span class="card-badge">GRAPHIC DESIGN</span>
+</div>
+<div class="card-content">
+<div class="card-meta">
+<span><i class="fa-regular fa-calendar"></i> JUL 30, 2026</span>
+<span><i class="fa-regular fa-clock"></i> 7 MIN READ</span>
+</div>
+<h3 class="card-title">Print Tactility in Digital Spaces: Textures, Grids, &amp; Asymmetric Flow</h3>
+<p class="card-excerpt">
+                Bridging Swiss editorial heritage with modern digital screens through tactile paper grain shaders and modular grid mathematics.
+              </p>
+<div class="card-footer">
+<a href="404.html" class="read-link">READ ESSAY </a>
+</div>
+</div>
+</article>
+<!-- Card 4: Motion & 3D -->
+<article class="article-card glass-panel" data-aos="fade-up" data-aos-delay="100" data-category="motion" data-id="4">
+<div class="card-image-wrap" data-aos="zoom-in" data-aos-delay="400">
+<img alt="3D Spatial Motion" class="card-img" src="assets/project-metaverse-art.webp"/>
+<span class="card-badge">MOTION &amp; 3D</span>
+</div>
+<div class="card-content">
+<div class="card-meta">
+<span><i class="fa-regular fa-calendar"></i> JUL 12, 2026</span>
+<span><i class="fa-regular fa-clock"></i> 9 MIN READ</span>
+</div>
+<h3 class="card-title">Spatial 3D Branding: Beyond Flat Logos into Volumetric Brand Environments</h3>
+<p class="card-excerpt">
+                How 3D real-time shaders and volumetric rendering empower high-end design agencies to build immersive physical and digital brand ecosystems.
+              </p>
+<div class="card-footer">
+<a href="404.html" class="read-link">READ ESSAY </a>
+</div>
+</div>
+</article>
+<!-- Card 5: Design Trends -->
+<article class="article-card glass-panel" data-aos="fade-up" data-aos-delay="200" data-category="trends" data-id="5">
+<div class="card-image-wrap" data-aos="zoom-in" data-aos-delay="100">
+<img alt="Design Trends 2026" class="card-img" src="assets/exp-variable-glyph.webp"/>
+<span class="card-badge">DESIGN TRENDS</span>
+</div>
+<div class="card-content">
+<div class="card-meta">
+<span><i class="fa-regular fa-calendar"></i> JUN 22, 2026</span>
+<span><i class="fa-regular fa-clock"></i> 10 MIN READ</span>
+</div>
+<h3 class="card-title">The Death of Bland Corporate Aesthetics: The Rise of High-Contrast Identity</h3>
+<p class="card-excerpt">
+                Why minimalist monochrome, neon violet highlights, and industrial grid lines are taking over modern tech and luxury visual branding.
+              </p>
+<div class="card-footer">
+<a href="404.html" class="read-link">READ ESSAY </a>
+</div>
+</div>
+</article>
+<!-- Card 6: Branding -->
+<article class="article-card glass-panel" data-aos="fade-up" data-aos-delay="300" data-category="branding" data-id="6">
+<div class="card-image-wrap" data-aos="zoom-in" data-aos-delay="200">
+<img alt="Generative Identity" class="card-img" src="assets/project-social-campaign.webp"/>
+<span class="card-badge">BRANDING</span>
+</div>
+<div class="card-content">
+<div class="card-meta">
+<span><i class="fa-regular fa-calendar"></i> JUN 04, 2026</span>
+<span><i class="fa-regular fa-clock"></i> 6 MIN READ</span>
+</div>
+<h3 class="card-title">Generative Identity Systems: Algorithmically Driven Visual Architectures</h3>
+<p class="card-excerpt">
+                Creating dynamic visual identities that mutate based on environmental data, sound, and real-time user interaction while preserving brand integrity.
+              </p>
+<div class="card-footer">
+<a href="404.html" class="read-link">READ ESSAY </a>
+</div>
+</div>
+</article>
+<!-- Card 7: Graphic Design -->
+<article class="article-card glass-panel" data-aos="fade-up" data-aos-delay="400" data-category="graphic" data-id="7">
+<div class="card-image-wrap" data-aos="zoom-in" data-aos-delay="300">
+<img alt="Color Systems" class="card-img" src="assets/project-brand-monograph.webp"/>
+<span class="card-badge">GRAPHIC DESIGN</span>
+</div>
+<div class="card-content">
+<div class="card-meta">
+<span><i class="fa-regular fa-calendar"></i> MAY 18, 2026</span>
+<span><i class="fa-regular fa-clock"></i> 7 MIN READ</span>
+</div>
+<h3 class="card-title">Color Psychology &amp; High-Contrast Systems in Modern Visual Identity</h3>
+<p class="card-excerpt">
+                Exploring how intense monochromatic bases paired with luminous violet and neon accents evoke emotion, establish authority, and improve contrast ratios.
+              </p>
+<div class="card-footer">
+<a href="404.html" class="read-link">READ ESSAY </a>
+</div>
+</div>
+</article>
+<!-- Card 8: Typography -->
+<article class="article-card glass-panel" data-aos="fade-up" data-aos-delay="100" data-category="typography" data-id="8">
+<div class="card-image-wrap" data-aos="zoom-in" data-aos-delay="400">
+<img alt="Editorial Grid" class="card-img" src="assets/project-nebula-ui.webp"/>
+<span class="card-badge">TYPOGRAPHY</span>
+</div>
+<div class="card-content">
+<div class="card-meta">
+<span><i class="fa-regular fa-calendar"></i> MAY 02, 2026</span>
+<span><i class="fa-regular fa-clock"></i> 8 MIN READ</span>
+</div>
+<h3 class="card-title">Editorial Grid Masterclass: Asymmetry, Micro-Spacing, &amp; Visual Tension</h3>
+<p class="card-excerpt">
+                How Swiss style alignment principles and intentional asymmetry create captivating page hierarchy in digital viewports and luxury print publications.
+              </p>
+<div class="card-footer">
+<a href="404.html" class="read-link">READ ESSAY </a>
+</div>
+</div>
+</article>
+<!-- Card 9: Motion & 3D -->
+<article class="article-card glass-panel" data-aos="fade-up" data-aos-delay="200" data-category="motion" data-id="9">
+<div class="card-image-wrap" data-aos="zoom-in" data-aos-delay="100">
+<img alt="Motion Architecture" class="card-img" src="assets/exp-spatial-polyhedron.webp"/>
+<span class="card-badge">MOTION &amp; 3D</span>
+</div>
+<div class="card-content">
+<div class="card-meta">
+<span><i class="fa-regular fa-calendar"></i> APR 19, 2026</span>
+<span><i class="fa-regular fa-clock"></i> 6 MIN READ</span>
+</div>
+<h3 class="card-title">Motion Architecture: Crafting Kinetic Brand Identifiers for Displays</h3>
+<p class="card-excerpt">
+                Designing seamless motion signatures and kinetic logo loops that elevate user engagement and brand recognition across public digital surfaces.
+              </p>
+<div class="card-footer">
+<a href="404.html" class="read-link">READ ESSAY </a>
+</div>
+</div>
+</article>
+</div>
+</div>
+</section>
+<!-- 5. DESIGN INSIGHTS (KINETIC TYPOGRAPHY QUOTES) -->
+<section class="snap-section design-insights-section" data-aos="fade-up" id="insights">
+<div class="ticker-wrap">
+<div class="ticker-move">
+<div class="ticker-item">"GOOD DESIGN IS CLEAR COMMUNICATION."</div>
+<div class="ticker-item text-outline">"DESIGN IS NOT DECORATION. IT IS DIRECTION."</div>
+<div class="ticker-item">"FORM FOLLOWS FUTURE ARCHITECTURE."</div>
+<div class="ticker-item text-outline">"GOOD DESIGN IS CLEAR COMMUNICATION."</div>
+</div>
+</div>
+</section>
+<!-- 7. DESIGN TRENDS 2026 -->
+<section class="snap-section design-trends-section" data-aos="fade-up" id="trends-section">
+<div class="section-container">
+<div class="section-header-compact">
+<span class="section-num">04 // FUTURE RADAR</span>
+<h2 class="section-title">2026 DESIGN DIRECTIONS</h2>
+</div>
+<div class="trends-cards-row">
+<div class="trend-card glass-panel" data-aos="fade-up" data-aos-delay="300">
+<div class="trend-num">01</div>
+<h4>3D Spatial Branding</h4>
+<p>Static vector logos are giving way to volumetric, real-time lighting brand objects that react dynamically to user environment.</p>
+</div>
+<div class="trend-card glass-panel" data-aos="fade-up" data-aos-delay="400">
+<div class="trend-num">02</div>
+<h4>Experimental Kinetic Type</h4>
+<p>Variable font axes driven by scroll physics, voice input, and kinetic mouse speed create unrepeatable reading experiences.</p>
+</div>
+<div class="trend-card glass-panel" data-aos="fade-up" data-aos-delay="100">
+<div class="trend-num">03</div>
+<h4>High-Contrast Brutal Elegance</h4>
+<p>Fusing raw industrial grid precision with ultra-smooth dark glass interfaces and single vibrant accent colors.</p>
+</div>
+<div class="trend-card glass-panel" data-aos="fade-up" data-aos-delay="200">
+<div class="trend-num">04</div>
+<h4>Tactile Digital Publications</h4>
+<p>Recreating physical paper weight, ink sheen, and page turning mechanics inside high-refresh-rate web apps.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- 12. CURATED DESIGN BOOKSHELF & MONOGRAPHS -->
+<section class="snap-section bookshelf-section" data-aos="fade-up" id="bookshelf">
+<div class="section-container">
+<div class="section-header-compact">
+<span class="section-num">09 // RECOMMENDED READS</span>
+<h2 class="section-title">THE DESIGNER'S ESSENTIAL BOOKSHELF</h2>
+</div>
+<div class="bookshelf-grid">
+<!-- Book 1 -->
+<div class="book-card glass-panel" data-aos="fade-up" data-aos-delay="100">
+<div class="book-cover-wrap" data-aos="zoom-in" data-aos-delay="100">
+<img alt="Grid Systems Book" class="book-cover" src="assets/book-grid-systems.webp"/>
+<span class="book-tag">FOUNDATIONAL</span>
+</div>
+<div class="book-details">
+<span class="book-author">Josef Müller-Brockmann</span>
+<h3 class="book-title">Grid Systems in Graphic Design</h3>
+<p class="book-summary">The definitive manifesto on raster graphics, typographic hierarchy, and structural page layouts for print and screen.</p>
+<div class="book-takeaway">
+<span><i class="fa-solid fa-check"></i> KEY TAKEAWAY:</span>
+<p>Grid alignment creates clarity, order, and objective visual hierarchy.</p>
+</div>
+</div>
+</div>
+<!-- Book 2 -->
+<div class="book-card glass-panel" data-aos="fade-up" data-aos-delay="200">
+<div class="book-cover-wrap" data-aos="zoom-in" data-aos-delay="200">
+<img alt="Thinking with Type" class="book-cover" src="assets/book-brand-identity.webp"/>
+<span class="book-tag">TYPOGRAPHY</span>
+</div>
+<div class="book-details">
+<span class="book-author">Ellen Lupton</span>
+<h3 class="book-title">Thinking with Type: Critical Guide</h3>
+<p class="book-summary">Essential guide for designers on letterform anatomy, paragraph styling, spatial kerning, and dynamic layout grids.</p>
+<div class="book-takeaway">
+<span><i class="fa-solid fa-check"></i> KEY TAKEAWAY:</span>
+<p>Type is a transparent vehicle for ideas and a rich expressive medium.</p>
+</div>
+</div>
+</div>
+<!-- Book 3 -->
+<div class="book-card glass-panel" data-aos="fade-up" data-aos-delay="300">
+<div class="book-cover-wrap" data-aos="zoom-in" data-aos-delay="300">
+<img alt="Interaction of Color" class="book-cover" src="assets/book-interaction-of-color.webp"/>
+<span class="book-tag">COLOR THEORY</span>
+</div>
+<div class="book-details">
+<span class="book-author">Josef Albers</span>
+<h3 class="book-title">Interaction of Color: Masterclass</h3>
+<p class="book-summary">A handbook on visual perception, optical color relativity, contrast interaction, and chromatic harmony balance.</p>
+<div class="book-takeaway">
+<span><i class="fa-solid fa-check"></i> KEY TAKEAWAY:</span>
+<p>Color is never seen as it physically is, but always in relation to adjacent tones.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 9. POPULAR ARTICLES (MINIMAL RANKING LIST) -->
+<section class="snap-section popular-articles-section" data-aos="fade-up" id="popular">
+<div class="section-container">
+<div class="section-header-compact">
+<span class="section-num">06 // MOST READ</span>
+<h2 class="section-title">POPULAR ARTICLES &amp; READS</h2>
+</div>
+<div class="ranking-list glass-panel" data-aos="fade-up" data-aos-delay="200">
+        <div class="ranking-item">
+          <span class="rank-num">#01</span>
+          <div class="rank-details">
+            <h4>The Architecture of Spatial Typography in Modern Brand Worlds</h4>
+            <p>Typography &amp; Branding // 8 min read</p>
+          </div>
+          <a href="404.html" class="rank-action-btn" aria-label="Read popular article 1"><i class="fa-solid fa-arrow-up-right-from-square rank-arrow"></i></a>
+        </div>
+        <div class="ranking-item">
+          <span class="rank-num">#02</span>
+          <div class="rank-details">
+            <h4>Deconstructing Minimal Maximalism: The 2026 Visual Identity Blueprint</h4>
+            <p>Branding // 6 min read</p>
+          </div>
+          <a href="404.html" class="rank-action-btn" aria-label="Read popular article 2"><i class="fa-solid fa-arrow-up-right-from-square rank-arrow"></i></a>
+        </div>
+        <div class="ranking-item">
+          <span class="rank-num">#03</span>
+          <div class="rank-details">
+            <h4>Kinetic Variable Fonts: Designing Motion Without Compromising Legibility</h4>
+            <p>Typography // 5 min read</p>
+          </div>
+          <a href="404.html" class="rank-action-btn" aria-label="Read popular article 3"><i class="fa-solid fa-arrow-up-right-from-square rank-arrow"></i></a>
+        </div>
+        <div class="ranking-item">
+          <span class="rank-num">#04</span>
+          <div class="rank-details">
+            <h4>Print Tactility in Digital Spaces: Textures, Grids, &amp; Asymmetric Flow</h4>
+            <p>Graphic Design // 7 min read</p>
+          </div>
+          <a href="404.html" class="rank-action-btn" aria-label="Read popular article 4"><i class="fa-solid fa-arrow-up-right-from-square rank-arrow"></i></a>
+        </div>
+        <div class="ranking-item">
+          <span class="rank-num">#05</span>
+          <div class="rank-details">
+            <h4>Spatial 3D Branding: Beyond Flat Logos into Volumetric Environments</h4>
+            <p>Motion &amp; 3D // 9 min read</p>
+          </div>
+          <a href="404.html" class="rank-action-btn" aria-label="Read popular article 5"><i class="fa-solid fa-arrow-up-right-from-square rank-arrow"></i></a>
+        </div></div>
+</div>
+</div>
+</section>
+<!-- 11. DESIGN PODCAST & AUDIO PERSPECTIVES -->
+<section class="snap-section podcast-section" data-aos="fade-up" id="podcasts">
+<div class="section-container">
+<div class="section-header-compact">
+<span class="section-num">08 // AUDIO INSIGHTS</span>
+<h2 class="section-title">VOICES OF GRAPHIC ARCHITECTURE</h2>
+</div>
+<div class="podcast-grid">
+<!-- Episode 1 -->
+<div class="podcast-card glass-panel" data-aos="fade-up" data-aos-delay="100">
+<div class="podcast-media" data-aos="zoom-in" data-aos-delay="150">
+<img alt="Podcast Ep 14" class="podcast-cover" src="assets/podcast-graphic-architect.webp"/>
+<a href="404.html" class="podcast-play-btn" aria-label="Play Episode 14"><i class="fa-solid fa-play"></i></a>
+<span class="ep-badge">EPISODE // 14</span>
+</div>
+<div class="podcast-info">
+<div class="guest-row">
+<img alt="Marcus Thorne" class="guest-avatar" src="assets/avatar-marcus-thorne.webp"/>
+<div>
+<span class="guest-name">Marcus Thorne</span>
+<span class="guest-title">Creative Director @ Vanguard Type</span>
+</div>
+</div>
+<h3 class="podcast-title">The Future of Variable Fonts in 3D Web Surfaces</h3>
+<p class="podcast-desc">Discussing the convergence of custom font rendering engines, browser GPU acceleration, and responsive lettering.</p>
+<div class="podcast-footer-meta">
+<span><i class="fa-regular fa-clock"></i> 42 MINS</span>
+<span><i class="fa-solid fa-headphones"></i> 4.8K LISTENERS</span>
+</div>
+</div>
+</div>
+<!-- Episode 2 -->
+<div class="podcast-card glass-panel" data-aos="fade-up" data-aos-delay="200">
+<div class="podcast-media" data-aos="zoom-in" data-aos-delay="150">
+<img alt="Podcast Ep 15" class="podcast-cover" src="assets/podcast-type-and-tech.webp"/>
+<a href="404.html" class="podcast-play-btn" aria-label="Play Episode 15"><i class="fa-solid fa-play"></i></a>
+<span class="ep-badge">EPISODE // 15</span>
+</div>
+<div class="podcast-info">
+<div class="guest-row">
+<img alt="Elena Rostova" class="guest-avatar" src="assets/avatar-elena-rostova.webp"/>
+<div>
+<span class="guest-name">Elena Rostova</span>
+<span class="guest-title">Principal Identity Architect</span>
+</div>
+</div>
+<h3 class="podcast-title">Minimal Maximalism: Identity Systems for Global Tech</h3>
+<p class="podcast-desc">How Swiss grid rigor and expressive visual density empower global startups to command category authority.</p>
+<div class="podcast-footer-meta">
+<span><i class="fa-regular fa-clock"></i> 38 MINS</span>
+<span><i class="fa-solid fa-headphones"></i> 6.2K LISTENERS</span>
+</div>
+</div>
+</div>
+<!-- Episode 3 -->
+<div class="podcast-card glass-panel" data-aos="fade-up" data-aos-delay="300">
+<div class="podcast-media" data-aos="zoom-in" data-aos-delay="150">
+<img alt="Podcast Ep 16" class="podcast-cover" src="assets/podcast-design-systems.webp"/>
+<a href="404.html" class="podcast-play-btn" aria-label="Play Episode 16"><i class="fa-solid fa-play"></i></a>
+<span class="ep-badge">EPISODE // 16</span>
+</div>
+<div class="podcast-info">
+<div class="guest-row">
+<img alt="David Sterling" class="guest-avatar" src="assets/avatar-liam-oconnor.webp"/>
+<div>
+<span class="guest-name">David Sterling</span>
+<span class="guest-title">Spatial Motion Designer</span>
+</div>
+</div>
+<h3 class="podcast-title">Generative Identity: When Logos Learn to Breathe</h3>
+<p class="podcast-desc">Exploring real-time data input shaders and algorithmic brand mark evolution in physical gallery installations.</p>
+<div class="podcast-footer-meta">
+<span><i class="fa-regular fa-clock"></i> 51 MINS</span>
+<span><i class="fa-solid fa-headphones"></i> 5.1K LISTENERS</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 11. BLOG CTA SECTION -->
+<section class="snap-section blog-cta-section" data-aos="fade-up" id="blog-cta">
+<div class="section-container">
+<div class="blog-cta-wrap">
+<h2 class="cta-title kinetic-title">
+<span>KEEP EXPLORING.</span><br/>
+<span class="violet-highlight">KEEP CREATING.</span>
+</h2>
+<p class="cta-desc">Ready to translate theoretical design concepts into a bespoke visual brand world?</p>
+<div class="cta-actions">
+<a class="btn btn-primary btn-xl magnetic-btn" href="contact.html">
+<span>COMMISSION A PROJECT</span>
+<i class="fa-solid fa-arrow-right"></i>
+</a>
+<a class="btn btn-glass btn-xl magnetic-btn" href="projects.html">
+<span>VIEW WORK PORTFOLIO</span>
+</a>
+</div>
+</div>
+</div>
+<!-- 12. 4-COLUMN SITE FOOTER -->
+<footer class="footer site-footer">
+<div class="footer-container section-container">
+<div class="footer-4col-grid">
+<!-- Col 1: Logo, Short Description & Socials -->
+<div class="footer-col footer-col-brand">
+<a class="footer-logo" href="index.html">
+<img alt="STACKLY" class="brand-logo-img" src="assets/logo.webp"/>
+</a>
+<p class="footer-brand-desc">
+                Crafting high-contrast brand identity systems, publication layouts, and future-forward design perspectives for visionary clients worldwide.
+              </p>
+<div class="footer-social-links">
+<a aria-label="Behance" class="footer-social-icon" href="404.html"><i class="fa-brands fa-behance"></i></a>
+<a aria-label="Dribbble" class="footer-social-icon" href="404.html"><i class="fa-brands fa-dribbble"></i></a>
+<a aria-label="Instagram" class="footer-social-icon" href="404.html"><i class="fa-brands fa-instagram"></i></a>
+<a aria-label="LinkedIn" class="footer-social-icon" href="404.html"><i class="fa-brands fa-linkedin"></i></a>
+</div>
+</div>
+<!-- Col 2: Quick Links -->
+<div class="footer-col">
+<h4 class="footer-col-title">QUICK LINKS</h4>
+<ul class="footer-nav-links">
+<li><a href="index.html">Home</a></li>
+<li><a href="projects.html">Projects</a></li>
+<li><a href="about.html">About</a></li>
+<li><a href="services.html">Services</a></li>
+<li><a href="blog.html">Blog</a></li>
+<li><a href="contact.html">Contact</a></li>
+</ul>
+</div>
+<!-- Col 3: Policies -->
+<div class="footer-col">
+<h4 class="footer-col-title">POLICIES &amp; LEGAL</h4>
+<ul class="footer-nav-links">
+<li><a href="404.html">Privacy Policy</a></li>
+<li><a href="404.html">Terms of Service</a></li>
+<li><a href="404.html">Revision &amp; Refund Policy</a></li>
+<li><a href="404.html">Copyright &amp; Asset Licensing</a></li>
+<li><a href="404.html">Client Confidentiality NDA</a></li>
+</ul>
+</div>
+<!-- Col 4: Contact Details -->
+<div class="footer-col">
+<h4 class="footer-col-title">CONTACT DETAILS</h4>
+<ul class="footer-contact-list">
+<li>
+<i class="fa-solid fa-envelope contact-ico"></i>
+<div>
+<span class="contact-lbl">Direct Email</span>
+<a class="contact-val" href="mailto:info@stackly.com">info@stackly.com</a>
+</div>
+</li>
+<li>
+<i class="fa-solid fa-phone contact-ico"></i>
+<div>
+<span class="contact-lbl">Phone Number</span>
+<a class="contact-val" href="tel:9876543210">+91 9876543210</a>
+</div>
+</li>
+<li>
+<i class="fa-solid fa-location-dot contact-ico"></i>
+<div>
+<span class="contact-lbl">Headquarters</span>
+<span class="contact-val">MMR Complex, Chinna Thirupathi, near Chinna Muniyappan Kovil, Salem, Tamil Nadu 636008</span>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<!-- Bottom Copyright Bar -->
+<div class="footer-bottom-bar">
+<p>© 2026 STACKLY. ALL RIGHTS RESERVED.</p>
+<p class="footer-tagline">DESIGN JOURNAL // 2D EDITORIAL GRAPHIC ARCHITECTURE</p>
+</div>
+</div>
+</footer>
+</section>
+</main>
+<!-- FULL ESSAY READER MODAL -->
+<div class="modal-overlay article-modal-overlay" id="article-modal">
+<div class="modal-card modal-xl article-modal-card glass-panel" data-aos="fade-up" data-aos-delay="200">
+<button class="modal-close" id="close-article-modal">×</button>
+<div class="article-modal-header">
+<div class="meta-row">
+<span class="category-tag tag-violet" id="modal-category">TYPOGRAPHY &amp; BRANDING</span>
+<span class="reading-time" id="modal-readtime"><i class="fa-regular fa-clock"></i> 8 MIN READ</span>
+<span class="post-date" id="modal-date"><i class="fa-regular fa-calendar"></i> SEPT 08, 2026</span>
+</div>
+<h1 class="modal-article-title" data-aos="fade-up" id="modal-title">The Architecture of Spatial Typography in Modern Brand Worlds</h1>
+</div>
+<div class="article-modal-body">
+<div class="article-hero-image-wrap">
+<img alt="The Architecture of Neon Brutalism Modal Preview" class="modal-hero-img" id="modal-img" src="assets/blog-neon-brutalism-architecture.webp"/>
+</div>
+<div class="article-layout-grid">
+<!-- Table of Contents Sidebar -->
+<aside class="toc-sidebar glass-panel" data-aos="fade-up" data-aos-delay="300">
+<span class="toc-title"><i class="fa-solid fa-list-ul"></i> TABLE OF CONTENTS</span>
+<ul class="toc-list">
+<li><a class="toc-link active" href="404.html">01. The Evolution of Spatial Scale</a></li>
+<li><a class="toc-link" href="404.html">02. High Contrast Grid Geometry</a></li>
+<li><a class="toc-link" href="404.html">03. Kinetic Weight &amp; Interpolation</a></li>
+<li><a class="toc-link" href="404.html">04. Case Applications &amp; Summary</a></li>
+</ul>
+<div class="article-share">
+<span>SHARE ESSAY</span>
+<div class="share-btns">
+<button class="share-btn"><i class="fa-brands fa-twitter"></i></button>
+<button class="share-btn"><i class="fa-brands fa-linkedin"></i></button>
+<button class="share-btn"><i class="fa-solid fa-link"></i></button>
+</div>
+</div>
+</aside>
+<!-- Main Article Essay Text -->
+<div class="essay-content-wrap">
+<p class="lead-paragraph">
+              Typography is no longer merely a conduit for textual message delivery. In modern 2D editorial design and high-density digital environments, lettering functions as structural architecture—shaping space, directing viewer focus, and forging memorable visual identities.
+            </p>
+<h3 data-aos="fade-up" id="section-1">01. The Evolution of Spatial Scale</h3>
+<p>
+              Traditional typographic rules prioritized uniformity and subtle hierarchy. However, contemporary visual identity systems demand radical contrast. By juxtaposing colossal display letterforms with ultra-refined micro-type, designers construct an asymmetrical tension that captivates user gaze instantly.
+            </p>
+<blockquote class="article-quote">
+              "Typography becomes architectural when space is treated not as emptiness, but as positive structural weight."
+            </blockquote>
+<h3 data-aos="fade-up" id="section-2">02. High Contrast Grid Geometry</h3>
+<p>
+              Behind every captivating editorial layout lies an uncompromising mathematical grid. Grid systems provide the essential discipline that prevents experimental layout from devolving into visual chaos. Whether designing print monoliths or responsive 120Hz viewports, grid precision ensures every element feels intentional.
+            </p>
+<h3 data-aos="fade-up" id="section-3">03. Kinetic Weight &amp; Interpolation</h3>
+<p>
+              With variable font technologies maturing, letterforms gain the ability to react dynamically to scroll momentum, user proximity, and interactive events. Variable axes permit seamless shifts in weight, width, and slant, transforming static headlines into living visual choreography.
+            </p>
+<h3 data-aos="fade-up" id="section-4">04. Case Applications &amp; Summary</h3>
+<p>
+              As brands compete in increasingly saturated digital markets, bespoke high-contrast graphic design stands out as a beacon of clarity and intentionality. Masterful typography will remain the foundation of enduring visual communication.
+            </p>
+<div class="article-author-bio glass-panel" data-aos="fade-up" data-aos-delay="400">
+<img alt="Elena Rostova" class="bio-avatar" src="assets/avatar-elena-rostova.webp"/>
+<div class="bio-text">
+<h5>WRITTEN BY STACKLY</h5>
+<p>Stackly is an international 2D Editorial Graphic Designer &amp; Visual Architect specializing in high-contrast brand systems, publication layout, and spatial motion typography.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- JavaScript Logic for Category Filtering, Modal, and Newsletter -->
+<script src="main.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Category Filter Logic
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      const articles = document.querySelectorAll('.article-card');
+
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          filterBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+
+          const filter = btn.getAttribute('data-filter');
+
+          articles.forEach(article => {
+            const category = article.getAttribute('data-category');
+            if (filter === 'all' || category === filter) {
+              article.style.display = 'flex';
+              article.style.animation = 'fadeIn 0.4s ease forwards';
+            } else {
+              article.style.display = 'none';
+            }
+          });
+        });
+      });
+
+      // Article Reader Modal Logic
+      const articleModal = document.getElementById('article-modal');
+      const closeArticleModal = document.getElementById('close-article-modal');
+      const openArticleBtns = document.querySelectorAll('.open-article-btn, .article-card');
+
+      const articlesData = {
+        '1': {
+          title: 'The Architecture of Spatial Typography in Modern Brand Worlds',
+          category: 'TYPOGRAPHY & BRANDING',
+          readTime: '8 MIN READ',
+          date: 'SEPT 08, 2026',
+          img: 'assets/blog_featured_spatial_type.webp'
+        },
+        '2': {
+          title: 'Deconstructing Minimal Maximalism: The 2026 Visual Identity Blueprint',
+          category: 'BRANDING',
+          readTime: '6 MIN READ',
+          date: 'AUG 28, 2026',
+          img: 'assets/project_neon_cybernetics.webp'
+        },
+        '3': {
+          title: 'Kinetic Variable Fonts: Designing Motion Without Compromising Legibility',
+          category: 'TYPOGRAPHY',
+          readTime: '5 MIN READ',
+          date: 'AUG 14, 2026',
+          img: 'assets/project_synthesis_editorial.webp'
+        },
+        '4': {
+          title: 'Print Tactility in Digital Spaces: Textures, Grids, & Asymmetric Flow',
+          category: 'GRAPHIC DESIGN',
+          readTime: '7 MIN READ',
+          date: 'JUL 30, 2026',
+          img: 'assets/project_kinetic_packaging.webp'
+        },
+        '5': {
+          title: 'Spatial 3D Branding: Beyond Flat Logos into Volumetric Brand Environments',
+          category: 'MOTION & 3D',
+          readTime: '9 MIN READ',
+          date: 'JUL 12, 2026',
+          img: 'assets/project_nebula_ui.webp'
+        },
+        '6': {
+          title: 'Generative Identity Systems: Algorithmically Driven Visual Architectures',
+          category: 'BRANDING',
+          readTime: '6 MIN READ',
+          date: 'JUN 04, 2026',
+          img: 'assets/project_neon_cybernetics.webp'
+        },
+        '7': {
+          title: 'Color Psychology & High-Contrast Systems in Modern Visual Identity',
+          category: 'GRAPHIC DESIGN',
+          readTime: '7 MIN READ',
+          date: 'MAY 18, 2026',
+          img: 'assets/project_synthesis_editorial.webp'
+        },
+        '8': {
+          title: 'Editorial Grid Masterclass: Asymmetry, Micro-Spacing, & Visual Tension',
+          category: 'TYPOGRAPHY',
+          readTime: '8 MIN READ',
+          date: 'MAY 02, 2026',
+          img: 'assets/project_kinetic_packaging.webp'
+        },
+        '9': {
+          title: 'Motion Architecture: Crafting Kinetic Brand Identifiers for Displays',
+          category: 'MOTION & 3D',
+          readTime: '6 MIN READ',
+          date: 'APR 19, 2026',
+          img: 'assets/project_nebula_ui.webp'
+        }
+      };
+
+      openArticleBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          if (e.target.closest('a[href="404.html"]') || e.target.classList.contains('read-link')) {
+            return;
+          }
+          let artId = btn.getAttribute('data-article') || btn.getAttribute('data-id');
+          if (!artId) artId = '1';
+
+          const data = articlesData[artId] || articlesData['1'];
+          document.getElementById('modal-title').textContent = data.title;
+          document.getElementById('modal-category').textContent = data.category;
+          document.getElementById('modal-readtime').innerHTML = `<i class="fa-regular fa-clock"></i> ${data.readTime}`;
+          document.getElementById('modal-date').innerHTML = `<i class="fa-regular fa-calendar"></i> ${data.date}`;
+          document.getElementById('modal-img').src = data.img;
+
+          articleModal.classList.add('active');
+          document.body.style.overflow = 'hidden';
+        });
+      });
+
+      if (closeArticleModal) {
+        closeArticleModal.addEventListener('click', () => {
+          articleModal.classList.remove('active');
+          document.body.style.overflow = '';
+        });
+      }
+
+      window.addEventListener('click', (e) => {
+        if (e.target === articleModal) {
+          articleModal.classList.remove('active');
+          document.body.style.overflow = '';
+        }
+      });
+
+      // Newsletter Submit Handler
+      const newsletterForm = document.getElementById('newsletter-form');
+      const newsletterMsg = document.getElementById('newsletter-message');
+
+      if (newsletterForm) {
+        newsletterForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const email = document.getElementById('newsletter-email').value;
+          newsletterMsg.style.display = 'block';
+          newsletterMsg.className = 'newsletter-toast success';
+          newsletterMsg.innerHTML = `<i class="fa-solid fa-circle-check"></i> WELCOME ABOARD! ${email} HAS BEEN SUBSCRIBED TO CREATIVE NOTES.`;
+          newsletterForm.reset();
+          setTimeout(() => {
+            newsletterMsg.style.display = 'none';
+          }, 5000);
+        });
+      }
+    });
+  </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+</body>
+</html>
