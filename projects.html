@@ -54,8 +54,17 @@
         <div class="preloader-counter" id="preloader-counter">0%</div>
       </div>
       <script>
-        (function () {
-          document.body.style.overflow = "hidden";
+      (function() {
+        if (sessionStorage.getItem('isReturningFrom404') === 'true') {
+          var preloader = document.getElementById('preloader');
+          if (preloader) {
+            preloader.style.display = 'none';
+            preloader.classList.add('preloader-hidden');
+          }
+          document.body.style.overflow = '';
+          return;
+        }
+        document.body.style.overflow = 'hidden';
           var fill = document.getElementById("preloader-fill");
           var counter = document.getElementById("preloader-counter");
           var preloader = document.getElementById("preloader");
@@ -1102,7 +1111,8 @@
                 class="slider-btn next-btn"
                 id="testimonial-next-btn"
               >
-                </button>
+                <i class="fa-solid fa-chevron-right"></i>
+              </button>
             </div>
           </div>
         </div>

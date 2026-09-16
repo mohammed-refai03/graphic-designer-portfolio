@@ -450,6 +450,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Redirect to 404 page when all values are entered correctly
       if (isValid) {
+        if (typeof window.saveScrollBefore404 === 'function') {
+          window.saveScrollBefore404();
+        }
         window.location.href = '404.html';
       }
     });

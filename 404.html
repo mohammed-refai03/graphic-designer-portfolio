@@ -57,7 +57,7 @@
 <i class="fa-solid fa-house"></i>
 <span>RETURN TO HOME</span>
 </a>
-<button class="btn-error-secondary magnetic-btn" data-cursor="hover" onclick="window.history.back()" type="button">
+<button class="btn-error-secondary magnetic-btn" data-cursor="hover" type="button" id="go-back-404-btn">
 <i class="fa-solid fa-arrow-left"></i>
 <span>GO BACK</span>
 </button>
@@ -131,6 +131,41 @@
           stagger: 0.15,
           ease: 'power3.out',
           delay: 0.2
+        });
+      }
+
+      // Return to exact previous page section logic
+      const urlBefore404 = sessionStorage.getItem('urlBefore404');
+      const goBackBtn = document.getElementById('go-back-404-btn') || document.querySelector('.btn-error-secondary');
+      const returnHomeBtn = document.querySelector('.btn-error-primary');
+      const logoLink = document.querySelector('.error-logo-link');
+
+      function handleGoBack(e) {
+        if (e) e.preventDefault();
+        if (window.history.length > 1) {
+          window.history.back();
+        } else if (urlBefore404) {
+          window.location.href = urlBefore404;
+        } else {
+          window.location.href = 'index.html';
+        }
+      }
+
+      if (goBackBtn) {
+        goBackBtn.onclick = handleGoBack;
+      }
+      if (returnHomeBtn) {
+        returnHomeBtn.addEventListener('click', (e) => {
+          if (urlBefore404 && (urlBefore404.includes('index.html') || urlBefore404.endsWith('/'))) {
+            handleGoBack(e);
+          }
+        });
+      }
+      if (logoLink) {
+        logoLink.addEventListener('click', (e) => {
+          if (urlBefore404 && (urlBefore404.includes('index.html') || urlBefore404.endsWith('/'))) {
+            handleGoBack(e);
+          }
         });
       }
     });

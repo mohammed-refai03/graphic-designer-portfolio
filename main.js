@@ -6,10 +6,23 @@
 /* --------------------------------------------------------------------------
    00. PRELOADER ANIMATION ENGINE (Full 2-Second Visible Animation)
    -------------------------------------------------------------------------- */
-if ('scrollRestoration' in history) {
-  history.scrollRestoration = 'manual';
-}
-window.scrollTo(0, 0);
+// Preserve scroll position on history back, scroll to top only on reload
+(function initScrollMode() {
+  const navEntries = performance.getEntriesByType && performance.getEntriesByType('navigation');
+  const isBack = navEntries && navEntries.length > 0 && navEntries[0].type === 'back_forward';
+  const isReload = navEntries && navEntries.length > 0 && navEntries[0].type === 'reload';
+
+  if (isBack) {
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'auto';
+    }
+  } else if (isReload) {
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
+  }
+})();
 
 (function initPreloader() {
   const preloader = document.getElementById('preloader');
@@ -169,22 +182,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 00C. GSAP SCROLLTRIGGER PARALLAX & REVEAL ENGINE
+  // 00C. GSAP SCROLLTRIGGER ENGINE
   if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
     gsap.registerPlugin(ScrollTrigger);
-
-    // Parallax scale for key project and service images
-    gsap.utils.toArray('.project-image-wrap img, .showcase-img-box img, .service-media-box img, .featured-img-wrap img, .ex-card-img-wrap img').forEach(img => {
-      gsap.to(img, {
-        scale: 1.06,
-        scrollTrigger: {
-          trigger: img,
-          start: 'top 85%',
-          end: 'bottom 15%',
-          scrub: 1.5
-        }
-      });
-    });
   }
 
 
@@ -225,6 +225,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // --------------------------------------------------------------------------
   const navLinks = document.querySelectorAll('.nav-link');
 
+  let navTicking = false;
   function updateActiveNav() {
     const pageName = window.location.pathname.split('/').pop() || 'index.html';
 
@@ -262,12 +263,39 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  window.addEventListener('scroll', updateActiveNav);
-  const snapContainer = document.querySelector('.snap-container');
-  if (snapContainer) {
-    snapContainer.addEventListener('scroll', updateActiveNav);
+  function onScrollNav() {
+    if (!navTicking) {
+      requestAnimationFrame(() => {
+        updateActiveNav();
+        navTicking = false;
+      });
+      navTicking = true;
+    }
   }
+
+  window.addEventListener('scroll', onScrollNav, { passive: true });
   updateActiveNav();
+
+  window.saveScrollBefore404 = function() {
+    try {
+      const currentScrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
+      sessionStorage.setItem('scrollBefore404', currentScrollY.toString());
+      sessionStorage.setItem('urlBefore404', window.location.href);
+    } catch(e) {}
+  };
+
+  // Intercept clicks on links pointing to 404.html
+  document.addEventListener('click', (e) => {
+    const link = e.target.closest('a, button');
+    if (!link) return;
+
+    const href = link.getAttribute('href');
+    const onclick = link.getAttribute('onclick');
+
+    if (href === '404.html' || (href && (href === '#' || href === '#0') && !link.classList.contains('sidebar-link') && !link.hasAttribute('data-tab')) || (onclick && onclick.includes('404.html'))) {
+      window.saveScrollBefore404();
+    }
+  }, true);
 
   // Smooth scroll for internal anchor links (with 404 navigation for unused '#' links)
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -280,6 +308,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (!targetId || targetId === '#' || targetId === '#0') {
         e.preventDefault();
+        window.saveScrollBefore404();
         window.location.href = '404.html';
         return;
       }
@@ -293,24 +322,46 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       } else {
         e.preventDefault();
+        window.saveScrollBefore404();
         window.location.href = '404.html';
       }
     });
   });
 
-  // Scroll to top on page refresh/reload
-  if ('scrollRestoration' in history) {
-    history.scrollRestoration = 'manual';
+  // Scroll restoration logic (restores exact section when returning from 404, or scrolls to top on reload)
+  try {
+    const navEntries = performance.getEntriesByType && performance.getEntriesByType('navigation');
+    const isReload = navEntries && navEntries.length > 0 && navEntries[0].type === 'reload';
+    const isBack = navEntries && navEntries.length > 0 && navEntries[0].type === 'back_forward';
+    const savedScroll = sessionStorage.getItem('scrollBefore404');
+
+    if (isReload) {
+      sessionStorage.removeItem('scrollBefore404');
+      if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+      }
+      window.scrollTo(0, 0);
+    } else if (savedScroll !== null) {
+      const targetY = parseInt(savedScroll, 10);
+      sessionStorage.removeItem('scrollBefore404');
+      if (!isNaN(targetY)) {
+        if ('scrollRestoration' in history) {
+          history.scrollRestoration = 'manual';
+        }
+        const restorePos = () => window.scrollTo(0, targetY);
+        restorePos();
+        requestAnimationFrame(restorePos);
+        setTimeout(restorePos, 20);
+        setTimeout(restorePos, 100);
+      }
+    } else if (isBack) {
+      if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'auto';
+      }
+    }
+  } catch (err) {
+    console.warn('Scroll restoration error:', err);
   }
-  window.addEventListener('load', () => {
-    window.scrollTo(0, 0);
-  });
-  window.addEventListener('pageshow', () => {
-    window.scrollTo(0, 0);
-  });
-  window.scrollTo(0, 0);
-  setTimeout(() => window.scrollTo(0, 0), 0);
-  setTimeout(() => window.scrollTo(0, 0), 50);
 
   // Mobile Nav Drawer Logic
   const hamburgerToggle = document.getElementById('hamburger-toggle');
@@ -884,29 +935,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // --------------------------------------------------------------------------
-  // HORIZONTAL PROCESS TRACK SCROLL-DRIVEN ANIMATION & WHEEL INTERCEPTOR
+  // HORIZONTAL PROCESS TRACK ARROW NAVIGATION (CLEAN NATURAL VERTICAL SCROLLING)
   // --------------------------------------------------------------------------
-  const processSections = [
-    { sec: document.getElementById('services-process'), track: document.getElementById('horizontal-process-track') },
-    { sec: document.getElementById('projects-process'), track: document.getElementById('projects-process-track') }
-  ];
-
-  processSections.forEach(({ sec, track }) => {
-    if (sec && track) {
-      sec.addEventListener('wheel', (e) => {
-        const maxScrollLeft = track.scrollWidth - track.clientWidth;
-        if (maxScrollLeft <= 0) return;
-
-        if (e.deltaY > 0 && track.scrollLeft < maxScrollLeft - 2) {
-          e.preventDefault();
-          track.scrollLeft += e.deltaY * 1.4;
-        } else if (e.deltaY < 0 && track.scrollLeft > 2) {
-          e.preventDefault();
-          track.scrollLeft += e.deltaY * 1.4;
-        }
-      }, { passive: false });
-    }
-  });
 
   // --------------------------------------------------------------------------
   // PROJECTS PAGE INTERACTIVITY & ARROW CONTROLS
@@ -973,21 +1003,6 @@ document.addEventListener('DOMContentLoaded', () => {
     projectsNextBtn.addEventListener('click', () => {
       projectsProcessTrack.scrollBy({ left: 360, behavior: 'smooth' });
     });
-  }
-
-  if (projectsProcessSec && projectsProcessTrack) {
-    projectsProcessSec.addEventListener('wheel', (e) => {
-      const track = projectsProcessTrack;
-      const maxScrollLeft = track.scrollWidth - track.clientWidth;
-
-      if (e.deltaY > 0 && track.scrollLeft < maxScrollLeft - 2) {
-        e.preventDefault();
-        track.scrollLeft += e.deltaY * 1.2;
-      } else if (e.deltaY < 0 && track.scrollLeft > 2) {
-        e.preventDefault();
-        track.scrollLeft += e.deltaY * 1.2;
-      }
-    }, { passive: false });
   }
 
   // --------------------------------------------------------------------------
