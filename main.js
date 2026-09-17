@@ -431,7 +431,6 @@ document.addEventListener('DOMContentLoaded', () => {
     heroTL
       .from('.reveal-label', { opacity: 0, y: -20, delay: 0.1 })
       .from('.reveal-text', { opacity: 0, y: 40, stagger: 0.15 }, '-=0.5')
-      .from('#hero-human-wrapper', { opacity: 0, scale: 0.85, y: '-45%' }, '-=0.6')
       .from('.reveal-paragraph', { opacity: 0, y: 20 }, '-=0.4')
       .from('.reveal-ctas', { opacity: 0, y: 20 }, '-=0.4');
   }
